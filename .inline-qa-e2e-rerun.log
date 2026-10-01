@@ -1,0 +1,47 @@
+
+> weride-discovery-workspace@1.0.0 test:e2e
+> playwright test
+
+
+Running 38 tests using 1 worker
+
+  ✓   1 [chromium] › tests/auth-direct-sso.spec.ts:36:38 › Microsoft SSO enters workspace directly with emailVerified=false (643ms)
+  ✓   2 [chromium] › tests/auth-direct-sso.spec.ts:36:38 › Microsoft SSO enters workspace directly with emailVerified=true (478ms)
+  ✓   3 [chromium] › tests/auth-direct-sso.spec.ts:57:3 › rejects member@outside.dev / microsoft.com with a specific reason (200ms)
+  ✓   4 [chromium] › tests/auth-direct-sso.spec.ts:57:3 › rejects member@madison.dev / google.com with a specific reason (187ms)
+  ✓   5 [chromium] › tests/auth-direct-sso.spec.ts:57:3 › rejects member@madison.dev / password with a specific reason (198ms)
+  ✓   6 [chromium] › tests/auth-direct-sso.spec.ts:57:3 › rejects member@madison.dev / custom with a specific reason (217ms)
+  ✓   7 [chromium] › tests/auth-direct-sso.spec.ts:57:3 › rejects member@madison.dev.evil.com / microsoft.com with a specific reason (203ms)
+  ✓   8 [chromium] › tests/auth-direct-sso.spec.ts:57:3 › rejects member@sub.madison.dev / microsoft.com with a specific reason (205ms)
+  ✓   9 [chromium] › tests/auth-direct-sso.spec.ts:64:1 › legacy tab session migrates to persistent storage and sign-out reaches other tabs (559ms)
+  ✓  10 [chromium] › tests/auth-direct-sso.spec.ts:81:1 › an open page signs out at the 24-hour limit without extending on token refresh (268ms)
+  ✓  11 [chromium] › tests/auth-direct-sso.spec.ts:89:1 › saved login survives an actual browser process restart on the same profile (706ms)
+  ✓  12 [chromium] › tests/auth-direct-sso.spec.ts:109:1 › a sleeping page checks expiry when brought back into focus (233ms)
+  ✓  13 [chromium] › tests/inline-qa.spec.ts:7:1 › only one accordion opens; keyboard, row and Q&A trigger work without navigation (762ms)
+  ✓  14 [chromium] › tests/inline-qa.spec.ts:15:1 › own question create/edit/answer/delete, author, counts, reload and activity (1.4s)
+  ✓  15 [chromium] › tests/inline-qa.spec.ts:25:1 › draft is retained when switching or filtering items; no silent publication (858ms)
+  ✓  16 [chromium] › tests/inline-qa.spec.ts:30:1 › other members questions show the asker and never expose edit/delete, including full detail (702ms)
+  ✓  17 [chromium] › tests/inline-qa.spec.ts:35:1 › system landscape provides live PIC, Q&A, discovery links and shared data with matrix (1.3s)
+  ✓  18 [chromium] › tests/inline-qa.spec.ts:43:1 › system group CSV download respects selected group and filter (412ms)
+  ✓  19 [chromium] › tests/inline-qa.spec.ts:46:38 › accordion, author, composer and system list layout in en (1.1s)
+  ✓  20 [chromium] › tests/inline-qa.spec.ts:46:38 › accordion, author, composer and system list layout in vi (1.1s)
+  ✓  21 [chromium] › tests/inline-qa.spec.ts:46:38 › accordion, author, composer and system list layout in sv (1.1s)
+  ✓  22 [chromium] › tests/pic.spec.ts:3:1 › assign an existing PIC, persist, filter the matrix, export and remove with history (1.4s)
+  ✓  23 [chromium] › tests/pic.spec.ts:19:1 › search, assign-to-me and cancel use actual preview account IDs (730ms)
+  ✓  24 [chromium] › tests/pic.spec.ts:26:38 › toolbar alignment and PIC dialog on desktop/mobile: en (2.0s)
+  ✓  25 [chromium] › tests/pic.spec.ts:26:38 › toolbar alignment and PIC dialog on desktop/mobile: vi (2.1s)
+  ✓  26 [chromium] › tests/pic.spec.ts:26:38 › toolbar alignment and PIC dialog on desktop/mobile: sv (2.1s)
+  ✓  27 [chromium] › tests/review-pack.spec.ts:4:1 › requirement action opens an exact, single-requirement review pack (1.3s)
+  ✓  28 [chromium] › tests/review-pack.spec.ts:5:1 › matrix pack downloads all 30 requirements, defaults to English and excludes estimates (714ms)
+  ✓  29 [chromium] › tests/review-pack.spec.ts:6:1 › module scope and item type selection update coverage without silent truncation (797ms)
+  ✓  30 [chromium] › tests/review-pack.spec.ts:7:1 › translations, creator notes, redaction and mobile layout work (1.2s)
+  ✓  31 [chromium] › tests/review-pack.spec.ts:8:1 › copy context succeeds without contacting a model or sharing service (717ms)
+  ✓  32 [chromium] › tests/review-pack.spec.ts:9:1 › related context retains separate target and supporting scope (721ms)
+  ✓  33 [chromium] › tests/workspace.spec.ts:7:1 › overview, all 30 matrix rows, filtering and CSV export (943ms)
+  ✓  34 [chromium] › tests/workspace.spec.ts:17:1 › Q&A create, translate, answer, edit, persist and delete (1.4s)
+  ✓  35 [chromium] › tests/workspace.spec.ts:28:92 › breakdown supports nested create/edit/delete, preserving children (1.1s)
+  ✓  36 [chromium] › tests/workspace.spec.ts:28:92 › assumption supports nested create/edit/delete, preserving children (1.0s)
+  ✓  37 [chromium] › tests/workspace.spec.ts:35:1 › vendor response validates CU and persists the recorded estimate (664ms)
+  ✓  38 [chromium] › tests/workspace.spec.ts:38:1 › mobile layout, system diagram, source notes and read-only production gate (789ms)
+
+  38 passed (33.9s)

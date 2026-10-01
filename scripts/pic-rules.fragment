@@ -1,0 +1,42 @@
+    function validDirectoryMember(d,uid) {
+      return uid == request.auth.uid && d.uid == uid
+        && d.keys().hasAll(['uid','displayName','email','provider','active','createdAt','updatedAt'])
+        && d.keys().hasOnly(['uid','displayName','email','provider','active','createdAt','updatedAt'])
+        && d.email is string && d.email.lower() == request.auth.token.email.lower()
+        && d.displayName is string && d.displayName.size() > 0 && d.displayName.size() <= 200
+        && d.provider == 'microsoft.com' && d.active is bool
+        && d.createdAt is timestamp && d.updatedAt == request.time;
+    }
+    function eligibleAssignee(uid) {
+      let path = /databases/$(database)/documents/workspaces/weride/members/$(uid);
+      return exists(path) && get(path).data.active == true
+        && get(path).data.provider == 'microsoft.com'
+        && get(path).data.email is string
+        && get(path).data.email.lower().matches('^[a-z0-9._%+-]+@madison[.]dev$');
+    }
+    function assignmentEvent(d,id) {
+      let path = /databases/$(database)/documents/workspaces/weride/activities/$(d.activityId);
+      let event = getAfter(path).data;
+      return !exists(path) && event.kind == 'assignment' && event.requirementId == id
+        && event.action == (d.assigneeUid == '' ? 'unassign' : 'assign')
+        && event.actor == request.auth.uid && event.at == request.time && event.after == d;
+    }
+    function validAssignment(d,id) {
+      return d.keys().hasAll(['id','assigneeUid','version','updatedBy','updatedByName','updatedAt','activityId'])
+        && d.keys().hasOnly(['id','assigneeUid','version','updatedBy','updatedByName','updatedAt','activityId'])
+        && d.id == id && reqExists(id)
+        && d.assigneeUid is string && d.assigneeUid.size() <= 128
+        && (d.assigneeUid == '' || (d.assigneeUid.matches('^[^/]+$') && eligibleAssignee(d.assigneeUid)))
+        && d.version is int && d.version > 0 && d.updatedBy == request.auth.uid
+        && d.updatedByName is string && d.updatedByName.size() <= 200 && d.updatedAt == request.time
+        && d.activityId is string && d.activityId.matches('^[a-f0-9-]{36}$')
+        && assignmentEvent(d,id);
+    }
+    function validAssignmentAudit(d) {
+      let path = /databases/$(database)/documents/workspaces/weride/assignments/$(d.requirementId);
+      let after = getAfter(path).data;
+      return d.entryId == d.requirementId && d.after == after && after.activityId == d.id
+        && after.updatedBy == request.auth.uid && after.updatedAt == request.time
+        && d.action == (after.assigneeUid == '' ? 'unassign' : 'assign')
+        && d.before == (exists(path) ? get(path).data : null);
+    }

@@ -1,0 +1,8 @@
+2026-09-29T06:39:29.598Z
+PASS: Live site serves enabled Microsoft sign-in; pending-setup gate removed.
+PASS: Actual sign-in click reaches Microsoft with the correct Madison tenant, client ID and Firebase callback.
+PASS: Deep link and preview parameter do not bypass authentication.
+PASS: English, Swedish and Vietnamese UI and saved locale work on production.
+PASS: Live Firestore still rejects anonymous workspace reads.
+PASS: No browser runtime errors during the smoke test.
+NOT TESTED: real user login, consent/MFA, secret exchange, verified email claims and authenticated CRUD. No user credentials entered.

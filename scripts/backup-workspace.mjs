@@ -1,0 +1,20 @@
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {maintenanceApi,listDocuments,WORKSPACE,PROJECT,digest} from './maintenance-firestore.mjs';
+// Administrative READ-ONLY snapshot. No deletion, migration, or credential export.
+const api=await maintenanceApi(),readTime=new Date(Date.now()-2000).toISOString();
+const root=(await api.get(WORKSPACE,{queryParams:{readTime}})).body;
+const names=[];let pageToken;
+do{const {body}=await api.post(WORKSPACE+':listCollectionIds',{pageSize:100,readTime,...(pageToken?{pageToken}:{})});names.push(...(body.collectionIds||[]));pageToken=body.nextPageToken;}while(pageToken);
+const documents=[root];for(const name of names)documents.push(...await listDocuments(api,WORKSPACE+'/'+name,readTime,true));
+assert(documents.every(d=>d.name===WORKSPACE||d.name.startsWith(WORKSPACE+'/')));
+const dir=path.resolve('.backups/data/'+new Date().toISOString().replace(/[:.]/g,'-')+'-before-uiux-upgrade');
+await mkdir(dir,{recursive:true,mode:0o700});
+const raw=JSON.stringify({schema:'weride.workspace-raw-backup.v1',project:PROJECT,readTime,scope:WORKSPACE,collections:names,documents},null,2)+'\n';
+await writeFile(path.join(dir,'workspace.raw.json'),raw,{mode:0o600,flag:'wx'});
+assert.equal(await readFile(path.join(dir,'workspace.raw.json'),'utf8'),raw);
+const manifest={project:PROJECT,readTime,count:documents.length,collections:names,sha256:digest(raw),scope:'Workspace and all descendant records; excludes Firebase Authentication and external share snapshots.'};
+await writeFile(path.join(dir,'manifest.json'),JSON.stringify(manifest,null,2)+'\n',{mode:0o600,flag:'wx'});
+await writeFile('.backups/uiux-data-current.txt',dir,{mode:0o600});
+console.log(JSON.stringify({backupDirectory:dir,...manifest},null,2));

@@ -1,0 +1,10 @@
+PASS: Live Hosting HTML and every JS/CSS asset match the tested local build.
+PASS: Anonymous requests cannot read the workspace, private context or share storage.
+SHARING: backend is available.
+PASS: Deep link still requires Microsoft login; preview query does not grant access.
+PASS: Production language switching, retained locale and mobile login layout work.
+PASS: No browser runtime errors during this smoke test.
+LIMIT: Real authenticated employee use and live public-share creation are not exercised by this anonymous smoke test.
+
+PASS: deployed rules match tested general-question permissions and priority validation.
+No production questions or assignments were changed by smoke checks.

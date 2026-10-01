@@ -1,0 +1,250 @@
+
+> weride-discovery-workspace@1.0.0 deploy:review-sharing
+> node scripts/deploy-review-sharing.mjs --account sonledn98@gmail.com
+
+
+> weride-discovery-workspace@1.0.0 test
+> vitest run
+
+
+ RUN  v3.2.7 /Users/sonle/Desktop/weride
+
+ ✓ tests/access.test.ts (15 tests) 2ms
+ ✓ tests/session-policy.test.ts (13 tests) 2ms
+stdout | tests/unit.test.ts
+🌐 i18next is made possible by our own product, Locize — consider powering your project with managed localization (AI, CDN, integrations): https://locize.com 💙
+
+stdout | tests/pic.test.ts
+🌐 i18next is made possible by our own product, Locize — consider powering your project with managed localization (AI, CDN, integrations): https://locize.com 💙
+
+(node:36569) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36570) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/pic.test.ts (6 tests) 14ms
+ ✓ tests/review-pack.test.ts (17 tests) 72ms
+ ✓ tests/unit.test.ts (10 tests) 24ms
+
+ Test Files  5 passed (5)
+      Tests  61 passed (61)
+   Start at  15:51:43
+   Duration  436ms (transform 184ms, setup 0ms, collect 329ms, tests 114ms, environment 0ms, prepare 368ms)
+
+
+> weride-discovery-workspace@1.0.0 build
+> tsc -b && vite build && node scripts/check-bundle.mjs
+
+vite v6.4.3 building for production...
+transforming...
+✓ 1656 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                           0.63 kB │ gzip:   0.40 kB
+dist/assets/ReviewPacks-CMQ4Vx4o.css      7.54 kB │ gzip:   2.14 kB
+dist/assets/index-CFvLsCMD.css           48.80 kB │ gzip:  11.39 kB
+dist/assets/ReviewPacks-1JIjbtnt.js      30.45 kB │ gzip:  10.33 kB
+dist/assets/index-DDlAjB6O.js         1,111.11 kB │ gzip: 304.97 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.80s
+PASS: 6 public assets checked; no RFP fixture, PDF or development seed endpoint is published.
+
+> weride-discovery-workspace@1.0.0 test:review-api
+> npm --prefix functions test
+
+
+> test
+> npm run build && node --test tests/*.test.mjs
+
+
+> build
+> tsc
+
+✔ status is public and all management operations require authorization (48.670583ms)
+✔ Microsoft exact-domain identity can create with email_verified false, and receives a read-only random link (15.707125ms)
+✔ rejects ineligible token bad (3.918458ms)
+✔ rejects ineligible token foreign (2.804666ms)
+✔ rejects ineligible token google (1.75025ms)
+✔ blocks cross-origin management even with a token (1.546709ms)
+✔ requires explicit disclosure, bounded lifetime and strict option schema (7.380542ms)
+✔ rejects stale preview without publishing (2.182875ms)
+✔ HTML is readable without JS and Markdown contains the same full snapshot (7.743458ms)
+✔ Accept text/markdown and download disposition are supported (2.649ms)
+✔ snapshot does not change when live source is edited (2.585959ms)
+✔ expired links return no source content and no cacheable response (1.983209ms)
+✔ revocation is owner-only, removes shared content, and blocks HTML and Markdown (3.048125ms)
+✔ owners cannot list other members links (2.59575ms)
+✔ invalid share paths cannot enumerate private data or execute writes (2.88725ms)
+✔ unsafe source HTML/Markdown cannot inject executable content or outbound images (1.324166ms)
+✔ authenticated sharing operations require login again after 24 hours (2.496791ms)
+✔ public snapshot availability depends on its own lifetime, not creator login age (2.554708ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 292.45175
+Updated IAM policy for project [weride-discovery].
+bindings:
+- members:
+  - serviceAccount:516352227094@cloudbuild.gserviceaccount.com
+  role: roles/cloudbuild.builds.builder
+- members:
+  - serviceAccount:service-516352227094@gcp-sa-cloudbuild.iam.gserviceaccount.com
+  role: roles/cloudbuild.serviceAgent
+- members:
+  - serviceAccount:service-516352227094@gcf-admin-robot.iam.gserviceaccount.com
+  role: roles/cloudfunctions.standardServiceAgent
+- members:
+  - serviceAccount:service-516352227094@containerregistry.iam.gserviceaccount.com
+  role: roles/containerregistry.ServiceAgent
+- members:
+  - serviceAccount:weride-review-sharing@weride-discovery.iam.gserviceaccount.com
+  role: roles/datastore.user
+- members:
+  - serviceAccount:516352227094-compute@developer.gserviceaccount.com
+  - serviceAccount:weride-discovery@appspot.gserviceaccount.com
+  role: roles/editor
+- members:
+  - serviceAccount:service-516352227094@gcp-sa-firebase.iam.gserviceaccount.com
+  role: roles/firebase.managementServiceAgent
+- members:
+  - serviceAccount:firebase-adminsdk-fbsvc@weride-discovery.iam.gserviceaccount.com
+  role: roles/firebase.sdkAdminServiceAgent
+- members:
+  - serviceAccount:firebase-adminsdk-fbsvc@weride-discovery.iam.gserviceaccount.com
+  role: roles/firebaseauth.admin
+- members:
+  - serviceAccount:service-516352227094@firebase-rules.iam.gserviceaccount.com
+  role: roles/firebaserules.system
+- members:
+  - serviceAccount:service-516352227094@gcp-sa-firestore.iam.gserviceaccount.com
+  role: roles/firestore.serviceAgent
+- members:
+  - serviceAccount:firebase-adminsdk-fbsvc@weride-discovery.iam.gserviceaccount.com
+  role: roles/iam.serviceAccountTokenCreator
+- members:
+  - user:sonledn98@gmail.com
+  role: roles/owner
+- members:
+  - serviceAccount:service-516352227094@serverless-robot-prod.iam.gserviceaccount.com
+  role: roles/run.serviceAgent
+etag: BwZcm0tmHC0=
+version: 1
+Updated IAM policy for project [weride-discovery].
+bindings:
+- members:
+  - serviceAccount:516352227094@cloudbuild.gserviceaccount.com
+  role: roles/cloudbuild.builds.builder
+- members:
+  - serviceAccount:service-516352227094@gcp-sa-cloudbuild.iam.gserviceaccount.com
+  role: roles/cloudbuild.serviceAgent
+- members:
+  - serviceAccount:service-516352227094@gcf-admin-robot.iam.gserviceaccount.com
+  role: roles/cloudfunctions.standardServiceAgent
+- members:
+  - serviceAccount:service-516352227094@containerregistry.iam.gserviceaccount.com
+  role: roles/containerregistry.ServiceAgent
+- members:
+  - serviceAccount:weride-review-sharing@weride-discovery.iam.gserviceaccount.com
+  role: roles/datastore.user
+- members:
+  - serviceAccount:516352227094-compute@developer.gserviceaccount.com
+  - serviceAccount:weride-discovery@appspot.gserviceaccount.com
+  role: roles/editor
+- members:
+  - serviceAccount:service-516352227094@gcp-sa-firebase.iam.gserviceaccount.com
+  role: roles/firebase.managementServiceAgent
+- members:
+  - serviceAccount:firebase-adminsdk-fbsvc@weride-discovery.iam.gserviceaccount.com
+  role: roles/firebase.sdkAdminServiceAgent
+- members:
+  - serviceAccount:firebase-adminsdk-fbsvc@weride-discovery.iam.gserviceaccount.com
+  role: roles/firebaseauth.admin
+- members:
+  - serviceAccount:weride-review-sharing@weride-discovery.iam.gserviceaccount.com
+  role: roles/firebaseauth.viewer
+- members:
+  - serviceAccount:service-516352227094@firebase-rules.iam.gserviceaccount.com
+  role: roles/firebaserules.system
+- members:
+  - serviceAccount:service-516352227094@gcp-sa-firestore.iam.gserviceaccount.com
+  role: roles/firestore.serviceAgent
+- members:
+  - serviceAccount:firebase-adminsdk-fbsvc@weride-discovery.iam.gserviceaccount.com
+  role: roles/iam.serviceAccountTokenCreator
+- members:
+  - user:sonledn98@gmail.com
+  role: roles/owner
+- members:
+  - serviceAccount:service-516352227094@serverless-robot-prod.iam.gserviceaccount.com
+  role: roles/run.serviceAgent
+etag: BwZcm0udTx0=
+version: 1
+
+=== Deploying to 'weride-discovery'...
+
+i  deploying functions
+Running command: npm --prefix "$RESOURCE_DIR" run build
+
+> build
+> tsc
+
+✔  functions: Finished running predeploy script.
+i  functions: preparing codebase review-sharing for deployment
+i  functions: ensuring required API cloudfunctions.googleapis.com is enabled...
+i  functions: ensuring required API cloudbuild.googleapis.com is enabled...
+i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled...
+✔  functions: required API cloudfunctions.googleapis.com is enabled
+✔  functions: required API cloudbuild.googleapis.com is enabled
+✔  artifactregistry: required API artifactregistry.googleapis.com is enabled
+⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory.
+⚠  functions: Please note that there will be breaking changes when you upgrade.
+i  functions: Loading and analyzing source code for codebase review-sharing to determine what to deploy
+Serving at port 8646
+
+i  extensions: ensuring required API firebaseextensions.googleapis.com is enabled...
+⚠  extensions: missing required API firebaseextensions.googleapis.com. Enabling now...
+i  functions: preparing functions directory for uploading...
+i  functions: packaged /Users/sonle/Desktop/weride/functions (69.01 KB) for uploading
+i  functions: ensuring required API run.googleapis.com is enabled...
+i  functions: ensuring required API eventarc.googleapis.com is enabled...
+i  functions: ensuring required API pubsub.googleapis.com is enabled...
+i  functions: ensuring required API storage.googleapis.com is enabled...
+✔  functions: required API storage.googleapis.com is enabled
+⚠  functions: missing required API eventarc.googleapis.com. Enabling now...
+✔  functions: required API pubsub.googleapis.com is enabled
+✔  functions: required API run.googleapis.com is enabled
+i  functions: generating the service identity for pubsub.googleapis.com...
+i  functions: generating the service identity for eventarc.googleapis.com...
+✔  functions: functions source uploaded successfully
+i  functions: creating Node.js 22 (2nd Gen) function review-sharing:reviewSharing(europe-west1)...
+✔  functions[review-sharing:reviewSharing(europe-west1)] Successful create operation.
+Function URL (review-sharing:reviewSharing(europe-west1)): https://europe-west1-weride-discovery.cloudfunctions.net/reviewSharing
+⚠  functions: No cleanup policy detected for repositories in europe-west1. This may result in a small monthly bill as container images accumulate over time.
+
+Error: Functions successfully deployed but could not set up cleanup policy in location europe-west1. Pass the --force option to automatically set up a cleanup policy or run 'firebase functions:artifacts:setpolicy' to manually set up a cleanup policy.
+node:internal/errors:998
+  const err = new Error(message);
+              ^
+
+Error: Command failed: firebase deploy --only functions:review-sharing --project weride-discovery --account sonledn98@gmail.com --non-interactive
+    at genericNodeError (node:internal/errors:998:15)
+    at wrappedFn (node:internal/errors:543:14)
+    at checkExecSyncError (node:child_process:925:11)
+    at execFileSync (node:child_process:961:15)
+    at file:///Users/sonle/Desktop/weride/scripts/deploy-review-sharing.mjs:13:1 {
+  status: 1,
+  signal: null,
+  output: [ null, null, null ],
+  pid: 36815,
+  stdout: null,
+  stderr: null
+}
+
+Node.js v25.9.0

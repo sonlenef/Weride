@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-29T08:59:27.811Z",
+  "project": "weride-discovery",
+  "checks": [
+    "Hosting rewrite reaches the live sharing function.",
+    "Management endpoints reject missing/invalid tokens and foreign origins.",
+    "Read-only production capture and pack generation work; no real source was published.",
+    "en: live HTML/Markdown agree; content readable without JavaScript; no caching.",
+    "en: revoked snapshot unavailable through HTML and Markdown; shared content removed.",
+    "vi: live HTML/Markdown agree; content readable without JavaScript; no caching.",
+    "vi: revoked snapshot unavailable through HTML and Markdown; shared content removed.",
+    "sv: live HTML/Markdown agree; content readable without JavaScript; no caching.",
+    "Expired live snapshot is immediately unavailable.",
+    "sv: revoked snapshot unavailable through HTML and Markdown; shared content removed.",
+    "Invalid/unknown share paths expose no source."
+  ],
+  "method": "Synthetic snapshots inserted/revoked administratively. Real Microsoft-authenticated API creation was not exercised by this script. No employee session or actual source was published."
+}

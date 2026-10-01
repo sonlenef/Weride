@@ -1,0 +1,26 @@
+{
+  "name": "weride-review-sharing",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "test:integration": "npm run build && node --test tests/repository.integration.mjs"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "firebase-admin": "^13.0.0",
+    "firebase-functions": "^6.0.0",
+    "markdown-it": "^14.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/markdown-it": "^14.1.0",
+    "@types/node": "^22.0.0",
+    "typescript": "~5.8.3"
+  }
+}

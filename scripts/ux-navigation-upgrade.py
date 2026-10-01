@@ -1,0 +1,15 @@
+from pathlib import Path
+p=Path('src/pages/Requirement.tsx')
+s=p.read_text()
+s="import ReplyThread from '../components/ReplyThread';\nimport {effectiveQuestionStatus} from '../lib/collaboration';\nimport {safeReturnTo} from '../lib/preferences';\n"+s
+s=s.replace('Link, useParams, useSearchParams','Link, useParams, useSearchParams, useLocation')
+s=s.replace('  const d=data!;',"  const location=useLocation();const returnTo=safeReturnTo(location.state?.returnTo);\n  const d=data!;")
+s=s.replace('setParams(q,{replace:true});','setParams(q,{replace:true,state:location.state});')
+s=s.replace('<Link to="/requirements"><ArrowLeft', '<Link to={returnTo} state={{restore:true}}><ArrowLeft')
+s=s.replace('to={`/requirements/${prev.id}`} aria-label', 'to={`/requirements/${prev.id}`} state={{returnTo}} aria-label')
+s=s.replace('to={`/requirements/${next.id}`} aria-label', 'to={`/requirements/${next.id}`} state={{returnTo}} aria-label')
+s=s.replace('<Link to="/sources"><BookOpen', '<Link to={`/sources?requirement=${r.id}#source-excerpt`} title={t(\'uxSourceExcerpt\')}><BookOpen')
+s=s.replace('<StatusBadge status={e.status}/>', '<StatusBadge status={e.kind===\'qa\'?effectiveQuestionStatus(e,d):e.status}/>')
+s=s.replace('<footer className="entry-footer">', "{e.kind==='qa'&&<ReplyThread question={e}/>}<footer className=\"entry-footer\">")
+p.write_text(s)
+print('Requirement navigation and authenticated source/reply presentation updated.')

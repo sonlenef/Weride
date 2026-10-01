@@ -1,0 +1,271 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Direct Microsoft SSO approved by the workspace owner; do not require Firebase email_verified.
+    // Tenant restriction is enforced by the single-tenant Entra application, not a client hint.
+    function member() {
+      return request.auth != null
+        && request.auth.token.email is string
+        && request.auth.token.email.lower().matches('^[a-z0-9._%+-]+@madison[.]dev$')
+        && request.auth.token.firebase.sign_in_provider == 'microsoft.com'
+        // Absolute 24-hour session window: refreshing an ID token must not extend auth_time.
+        && request.auth.token.auth_time is int && request.auth.token.auth_time > 0
+        && timestamp.value(request.auth.token.auth_time * 1000) <= request.time + duration.value(5, 'm')
+        && request.time < timestamp.value(request.auth.token.auth_time * 1000) + duration.value(24, 'h');
+    }
+    function localized(v, max) {
+      return v is map && v.keys().hasAll(['en','vi','sv']) && v.keys().hasOnly(['en','vi','sv'])
+        && v.en is string && v.vi is string && v.sv is string
+        && v.en.size() <= max && v.vi.size() <= max && v.sv.size() <= max;
+    }
+    function optionalNumber(v, max) { return v == null || (v is number && v >= 0 && v <= max); }
+    function reqExists(id) { return exists(/databases/$(database)/documents/workspaces/weride/requirements/$(id)); }
+    function validEntry(d, id) {
+      return d.keys().hasAll(['id','requirementId','kind','parentId','title','body','answer','acceptance','status','priority','owner','estimateHours','version','origin','createdBy','updatedBy','createdByName','updatedByName','createdAt','updatedAt'])
+        && d.keys().hasOnly(['id','requirementId','kind','parentId','title','body','answer','acceptance','status','priority','owner','estimateHours','version','origin','createdBy','updatedBy','createdByName','updatedByName','createdAt','updatedAt','originalLocale','restoredFrom'])
+        && d.id == id && id.size() <= 128
+        && d.requirementId is string
+        && (d.requirementId == '' ? d.kind == 'qa' : reqExists(d.requirementId))
+        && d.kind in ['qa','breakdown','assumption']
+        && d.parentId is string && d.parentId.size() <= 128 && d.parentId != id
+        && localized(d.title,2000) && (d.kind == 'qa' ? d.get('originalLocale','en') in ['en','vi','sv'] && d.title[d.get('originalLocale','en')].size() > 0 : d.title.en.size() > 0)
+        && localized(d.body,12000) && localized(d.answer,12000) && localized(d.acceptance,12000)
+        && ((d.kind == 'qa' && d.status in ['open','answered','resolved'] && (d.status == 'open' || contentPresent(d.answer)) && d.parentId == '')
+          || (d.kind == 'breakdown' && d.status in ['todo','progress','done'])
+          || (d.kind == 'assumption' && d.status in ['unvalidated','confirmed','rejected']))
+        && d.priority in ['low','medium','high','critical']
+        && d.owner is string && d.owner.size() <= 200
+        && optionalNumber(d.estimateHours,100000)
+        && d.version is int && d.version > 0
+        && d.origin in ['proposal','team']
+        && d.createdBy is string && d.createdByName is string && d.createdByName.size() <= 200
+        && d.updatedBy == request.auth.uid && d.updatedByName is string && d.updatedByName.size() <= 200
+        && d.createdAt is timestamp && d.updatedAt == request.time;
+    }
+    function validParent(d) {
+      return d.parentId == '' || (
+        exists(/databases/$(database)/documents/workspaces/weride/entries/$(d.parentId))
+        && get(/databases/$(database)/documents/workspaces/weride/entries/$(d.parentId)).data.requirementId == d.requirementId
+        && get(/databases/$(database)/documents/workspaces/weride/entries/$(d.parentId)).data.kind == d.kind
+      );
+    }
+    function validReview(d,id) {
+      return d.keys().hasAll(['id','compliance','state','comments','effortHours','cost','currency','releaseDate','version','updatedBy','updatedByName','updatedAt'])
+        && d.keys().hasOnly(['id','compliance','state','comments','effortHours','cost','currency','releaseDate','version','updatedBy','updatedByName','updatedAt'])
+        && d.id == id && reqExists(id)
+        && d.compliance in ['','FC','PC','RD','CU','NC']
+        && d.state in ['unreviewed','reviewing','clarified','scoped']
+        && localized(d.comments,12000) && optionalNumber(d.effortHours,100000) && optionalNumber(d.cost,100000000)
+        && d.currency in ['EUR','SEK'] && d.releaseDate is string
+        && (d.releaseDate == '' || d.releaseDate.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$'))
+        && (d.compliance != 'RD' || d.releaseDate != '')
+        && (d.compliance != 'CU' || (d.effortHours != null && d.cost != null))
+        && d.version is int && d.version > 0
+        && d.updatedBy == request.auth.uid && d.updatedByName is string && d.updatedByName.size() <= 200
+        && d.updatedAt == request.time;
+    }
+    function validDirectoryMember(d,uid) {
+      return uid == request.auth.uid && d.uid == uid
+        && d.keys().hasAll(['uid','displayName','email','provider','active','createdAt','updatedAt'])
+        && d.keys().hasOnly(['uid','displayName','email','provider','active','createdAt','updatedAt'])
+        && d.email is string && d.email.lower() == request.auth.token.email.lower()
+        && d.displayName is string && d.displayName.size() > 0 && d.displayName.size() <= 200
+        && d.provider == 'microsoft.com' && d.active is bool
+        && d.createdAt is timestamp && d.updatedAt == request.time;
+    }
+    function eligibleAssignee(uid) {
+      let path = /databases/$(database)/documents/workspaces/weride/members/$(uid);
+      return exists(path) && get(path).data.active == true
+        && get(path).data.provider == 'microsoft.com'
+        && get(path).data.email is string
+        && get(path).data.email.lower().matches('^[a-z0-9._%+-]+@madison[.]dev$');
+    }
+    function assignmentEvent(d,id) {
+      let path = /databases/$(database)/documents/workspaces/weride/activities/$(d.activityId);
+      let event = getAfter(path).data;
+      return !exists(path) && event.kind == 'assignment' && event.requirementId == id
+        && event.action == (d.assigneeUid == '' ? 'unassign' : 'assign')
+        && event.actor == request.auth.uid && event.at == request.time && event.after == d;
+    }
+    function validAssignment(d,id) {
+      return d.keys().hasAll(['id','assigneeUid','version','updatedBy','updatedByName','updatedAt','activityId'])
+        && d.keys().hasOnly(['id','assigneeUid','version','updatedBy','updatedByName','updatedAt','activityId'])
+        && d.id == id && reqExists(id)
+        && d.assigneeUid is string && d.assigneeUid.size() <= 128
+        && (d.assigneeUid == '' || (d.assigneeUid.matches('^[^/]+$') && eligibleAssignee(d.assigneeUid)))
+        && d.version is int && d.version > 0 && d.updatedBy == request.auth.uid
+        && d.updatedByName is string && d.updatedByName.size() <= 200 && d.updatedAt == request.time
+        && d.activityId is string && d.activityId.matches('^[a-f0-9-]{36}$')
+        && assignmentEvent(d,id);
+    }
+    function validAssignmentAudit(d) {
+      let path = /databases/$(database)/documents/workspaces/weride/assignments/$(d.requirementId);
+      let after = getAfter(path).data;
+      return d.entryId == d.requirementId && d.after == after && after.activityId == d.id
+        && after.updatedBy == request.auth.uid && after.updatedAt == request.time
+        && d.action == (after.assigneeUid == '' ? 'unassign' : 'assign')
+        && d.before == (exists(path) ? get(path).data : null);
+    }
+    function validAudit(d,id) {
+      return d.keys().hasAll(['id','action','requirementId','entryId','kind','title','actor','actorName','at','before','after'])
+        && d.keys().hasOnly(['id','action','requirementId','entryId','kind','title','actor','actorName','at','before','after'])
+        && d.id == id && d.action in ['create','update','delete','review','assign','unassign','restore','resolve']
+        && d.requirementId is string
+        && (d.requirementId == '' ? d.kind in ['qa','reply','resolution','decision'] : reqExists(d.requirementId))
+        && d.entryId is string && d.entryId.size() <= 128
+        && d.kind in ['qa','breakdown','assumption','review','assignment','reply','resolution','decision'] && localized(d.title,2000)
+        && d.actor == request.auth.uid && d.actorName is string && d.actorName.size() <= 200
+        && d.at == request.time && (d.before == null || d.before is map) && (d.after == null || d.after is map)
+        && (d.kind == 'assignment' ? validAssignmentAudit(d) : d.action in ['create','update','delete','review','restore','resolve']);
+    }
+    function validDecisionRequirements(ids) { return ids.toSet().hasOnly(["FN-BKG-01", "FN-BKG-02", "FN-DIS-01", "FN-DIS-02", "FN-DRV-01", "FN-DRV-02", "FN-PAS-01", "FN-PAS-02", "FN-COM-01", "FN-HTL-01", "FN-SUP-01", "FN-VOU-01", "FN-INT-01", "REG-PWD-01", "REG-PWD-02", "REG-PWD-03", "REG-PWD-04", "REG-PWD-05", "REG-DAC-01", "REG-DAC-02", "REG-DAC-03", "REG-SWE-01", "REG-SWE-02", "REG-SWE-03", "EXP-AI-01", "EXP-FLT-01", "EXP-M365-01", "EXP-M365-02", "EXP-PAS-01", "EXP-DRV-01"]); }
+    function contentPresent(v) { return v.en.size() > 0 || v.vi.size() > 0 || v.sv.size() > 0; }
+    function questionExists(id) { return exists(/databases/$(database)/documents/workspaces/weride/entries/$(id)) && get(/databases/$(database)/documents/workspaces/weride/entries/$(id)).data.kind == 'qa'; }
+    function ownQuestion(id) { return questionExists(id) && get(/databases/$(database)/documents/workspaces/weride/entries/$(id)).data.createdBy == request.auth.uid; }
+    function acceptedReply(id,questionId) {
+      let path = /databases/$(database)/documents/workspaces/weride/resolutions/$(questionId);
+      return exists(path) && get(path).data.replyId == id;
+    }
+    function validReply(d,id) {
+      return d.keys().hasAll(['id','questionId','body','originalLocale','version','createdBy','createdByName','createdAt','updatedBy','updatedByName','updatedAt'])
+        && d.keys().hasOnly(['id','questionId','body','originalLocale','version','createdBy','createdByName','createdAt','updatedBy','updatedByName','updatedAt'])
+        && d.id == id && id.size() <= 128 && d.questionId is string && questionExists(d.questionId)
+        && d.originalLocale in ['en','vi','sv'] && localized(d.body,12000) && d.body[d.originalLocale].size() > 0
+        && d.version is int && d.version > 0 && d.createdBy is string && d.createdByName is string && d.createdByName.size() <= 200
+        && d.createdAt is timestamp && d.updatedBy == request.auth.uid && d.updatedByName is string && d.updatedByName.size() <= 200 && d.updatedAt == request.time;
+    }
+    function validResolution(d,id) {
+      let reply = /databases/$(database)/documents/workspaces/weride/replies/$(d.replyId);
+      return d.keys().hasAll(['id','replyId','replyVersion','version','updatedBy','updatedByName','updatedAt'])
+        && d.keys().hasOnly(['id','replyId','replyVersion','version','updatedBy','updatedByName','updatedAt'])
+        && d.id == id && ownQuestion(id) && d.replyId is string && d.replyId.size() <= 128
+        && d.replyVersion is int && (d.replyId == '' ? d.replyVersion == 0 : exists(reply) && get(reply).data.questionId == id && get(reply).data.version == d.replyVersion)
+        && d.version is int && d.version > 0 && d.updatedBy == request.auth.uid && d.updatedByName is string && d.updatedByName.size() <= 200 && d.updatedAt == request.time;
+    }
+    function validRestore(d) {
+      let path = /databases/$(database)/documents/workspaces/weride/trash/$(d.restoredFrom);
+      let old = get(path).data;
+      let after = getAfter(path).data;
+      return d.restoredFrom is string && old.entryId == d.id && old.restoredBy == '' && after.restoredBy == request.auth.uid && after.restoredAt == request.time
+        && (old.snapshot.kind != 'qa' || old.snapshot.createdBy == request.auth.uid) && d.version == old.snapshot.version + 1
+        && d.diff(old.snapshot).affectedKeys().hasOnly(['version','updatedAt','updatedBy','updatedByName','restoredFrom']);
+    }
+    function validTrash(d,id) {
+      let entry = /databases/$(database)/documents/workspaces/weride/entries/$(d.entryId);
+      return d.keys().hasAll(['id','entryId','snapshot','deletedBy','deletedByName','deletedAt','restoredBy','restoredAt','version'])
+        && d.keys().hasOnly(['id','entryId','snapshot','deletedBy','deletedByName','deletedAt','restoredBy','restoredAt','version'])
+        && d.id == id && d.entryId is string && exists(entry) && !existsAfter(entry) && d.snapshot == get(entry).data
+        && (d.snapshot.kind != 'qa' || d.snapshot.createdBy == request.auth.uid)
+        && d.deletedBy == request.auth.uid && d.deletedByName is string && d.deletedByName.size() <= 200 && d.deletedAt == request.time
+        && d.restoredBy == '' && d.restoredAt == null && d.version == 1;
+    }
+    function restoredTrash(d,old) {
+      let entry = /databases/$(database)/documents/workspaces/weride/entries/$(old.entryId);
+      let restored = getAfter(entry).data;
+      return old.restoredBy == '' && !exists(entry) && (old.snapshot.kind != 'qa' || old.snapshot.createdBy == request.auth.uid)
+        && d.diff(old).affectedKeys().hasOnly(['version','restoredBy','restoredAt']) && d.version == old.version + 1
+        && d.restoredBy == request.auth.uid && d.restoredAt == request.time && restored.restoredFrom == old.id
+        && restored.version == old.snapshot.version + 1 && restored.updatedBy == request.auth.uid && restored.updatedAt == request.time;
+    }
+    function validDecision(d,id) {
+      return d.keys().hasAll(['id','title','body','originalLocale','state','source','ownerUid','requirementIds','version','createdBy','createdByName','createdAt','updatedBy','updatedByName','updatedAt','confirmedBy','confirmedAt'])
+        && d.keys().hasOnly(['id','title','body','originalLocale','state','source','ownerUid','requirementIds','version','createdBy','createdByName','createdAt','updatedBy','updatedByName','updatedAt','confirmedBy','confirmedAt'])
+        && d.id == id && id.size() <= 128 && d.originalLocale in ['en','vi','sv'] && localized(d.title,2000) && d.title[d.originalLocale].size() > 0 && localized(d.body,12000)
+        && d.state in ['proposed','confirmed','superseded'] && d.source is string && d.source.size() <= 4000
+        && d.ownerUid is string && d.ownerUid.size() <= 128 && (d.ownerUid == '' || eligibleAssignee(d.ownerUid))
+        && d.requirementIds is list && d.requirementIds.size() <= 30 && d.requirementIds.toSet().size() == d.requirementIds.size() && validDecisionRequirements(d.requirementIds)
+        && (d.state == 'confirmed' ? d.source.size() > 0 && d.confirmedBy == request.auth.uid && d.confirmedAt == request.time : d.confirmedBy == '' && d.confirmedAt == null)
+        && d.version is int && d.version > 0 && d.createdBy is string && d.createdByName is string && d.createdByName.size() <= 200 && d.createdAt is timestamp
+        && d.updatedBy == request.auth.uid && d.updatedByName is string && d.updatedByName.size() <= 200 && d.updatedAt == request.time;
+    }
+
+    match /workspaces/weride {
+      match /replies/{id} {
+        allow read: if member();
+        allow create: if member() && validReply(request.resource.data,id) && request.resource.data.version == 1 && request.resource.data.createdBy == request.auth.uid && request.resource.data.createdAt == request.time;
+        allow update: if member() && resource.data.createdBy == request.auth.uid && !acceptedReply(id,resource.data.questionId) && validReply(request.resource.data,id)
+          && request.resource.data.version == resource.data.version + 1 && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['body','originalLocale','version','updatedBy','updatedByName','updatedAt']);
+        allow delete: if member() && resource.data.createdBy == request.auth.uid && !acceptedReply(id,resource.data.questionId);
+      }
+      match /resolutions/{id} {
+        allow read: if member();
+        allow create: if member() && validResolution(request.resource.data,id) && request.resource.data.version == 1;
+        allow update: if member() && validResolution(request.resource.data,id) && request.resource.data.version == resource.data.version + 1;
+        allow delete: if false;
+      }
+      match /decisions/{id} {
+        allow read: if member();
+        allow create: if member() && validDecision(request.resource.data,id) && request.resource.data.createdBy == request.auth.uid && request.resource.data.createdAt == request.time && request.resource.data.version == 1;
+        allow update: if member() && resource.data.createdBy == request.auth.uid && validDecision(request.resource.data,id) && request.resource.data.version == resource.data.version + 1
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['title','body','originalLocale','state','source','ownerUid','requirementIds','version','updatedBy','updatedByName','updatedAt','confirmedBy','confirmedAt']);
+        allow delete: if false;
+      }
+      match /trash/{id} {
+        allow read: if member();
+        allow create: if member() && validTrash(request.resource.data,id);
+        allow update: if member() && restoredTrash(request.resource.data,resource.data);
+        allow delete: if false;
+      }
+
+      allow read: if member();
+      allow write: if false;
+      // Signed-in users register only their own UID/email; no role changes are permitted.
+      match /members/{uid} {
+        allow read: if member();
+        allow create: if member() && validDirectoryMember(request.resource.data,uid)
+          && request.resource.data.active == true && request.resource.data.createdAt == request.time;
+        allow update: if member() && resource.data.active == true && validDirectoryMember(request.resource.data,uid)
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['displayName','email','updatedAt']);
+        allow delete: if false;
+      }
+      // A single PIC per requirement. Source remains locked. Audit must be written atomically.
+      match /assignments/{id} {
+        allow read: if member();
+        allow create: if member() && validAssignment(request.resource.data,id) && request.resource.data.version == 1;
+        allow update: if member() && validAssignment(request.resource.data,id)
+          && request.resource.data.version == resource.data.version + 1;
+        allow delete: if false;
+      }
+      match /requirements/{id} { allow read: if member(); allow write: if false; }
+      // Source-referenced context is provisioned by an administrator; clients cannot amend it.
+      match /context/{id} { allow read: if member(); allow write: if false; }
+      match /entries/{id} {
+        allow read: if member();
+        allow create: if member() && validEntry(request.resource.data,id) && validParent(request.resource.data)
+          && (('restoredFrom' in request.resource.data) ? validRestore(request.resource.data) : request.resource.data.version == 1 && request.resource.data.origin == 'team' && request.resource.data.createdBy == request.auth.uid && request.resource.data.createdAt == request.time);
+        allow update: if member() && validEntry(request.resource.data,id)
+          && (resource.data.kind != 'qa' || resource.data.createdBy == request.auth.uid)
+          && request.resource.data.version == resource.data.version + 1
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['title','body','answer','acceptance','status','priority','owner','estimateHours','version','updatedBy','updatedByName','updatedAt','originalLocale','requirementId'])
+          && (resource.data.kind == 'qa' || request.resource.data.requirementId == resource.data.requirementId);
+        // Q&A belongs to the asker (immutable UID); PIC and display name grant no ownership.
+        // Non-Q&A parent deletion still preserves orphaned children.
+        allow delete: if member() && (resource.data.kind != 'qa' || resource.data.createdBy == request.auth.uid);
+      }
+      match /reviews/{id} {
+        allow read: if member();
+        allow create: if member() && validReview(request.resource.data,id) && request.resource.data.version == 1;
+        allow update: if member() && validReview(request.resource.data,id) && request.resource.data.version == resource.data.version + 1;
+        allow delete: if false;
+      }
+      // Append-only collaboration history. Administrative SDK access bypasses these rules.
+      // This is not represented as an independent, compliance-grade audit trail.
+      match /activities/{id} {
+        allow read: if member();
+        allow create: if member() && validAudit(request.resource.data,id);
+        allow update, delete: if false;
+      }
+    }
+    // Shares, bearer secrets, owner indexes and limits are server-only. No public Firestore grants.
+    // Client questionnaires, access hashes, drafts and submissions are server-only.
+    match /clientQuestionnaires/{document=**} { allow read, write: if false; }
+    match /clientQuestionnaireTokens/{document=**} { allow read, write: if false; }
+    match /clientQuestionnaireOwners/{document=**} { allow read, write: if false; }
+    match /clientQuestionnaireLimits/{document=**} { allow read, write: if false; }
+    match /clientQuestionnaireRates/{document=**} { allow read, write: if false; }
+    match /reviewShares/{document=**} { allow read, write: if false; }
+    match /reviewShareOwners/{document=**} { allow read, write: if false; }
+    match /reviewShareLimits/{document=**} { allow read, write: if false; }
+    match /{document=**} { allow read, write: if false; }
+  }
+}

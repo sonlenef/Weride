@@ -1,0 +1,14 @@
+import {useState,lazy,Suspense} from 'react';
+import type {ReactNode} from 'react';
+import {useTranslation} from 'react-i18next';
+import {ArrowRight,KeyRound,Layers3,ListChecks,LockKeyhole,MessageSquareText,ShieldCheck} from 'lucide-react';
+import {AuthProvider,useAuth} from './lib/auth';
+import {microsoftReady} from './lib/firebase';
+import {Brand,LocaleSwitch,Spinner,ToastProvider} from './components/ui';
+const AuthenticatedApp=lazy(()=>import('./AuthenticatedApp'));
+function Gate({children}:{children:ReactNode}){
+  const {member,loading,error,login,configured,persistenceLimited}=useAuth();const{t}=useTranslation();const[busy,setBusy]=useState(false);
+  if(loading)return <Spinner/>;if(member)return children;
+  return <div className="login-page"><section className="login-story"><Brand/><div className="login-story-body"><span className="eyebrow">MADISON × WERIDE</span><h1>{t('loginTitle')}</h1><p>{t('loginBody')}</p><div className="login-feature"><ListChecks/><span>{t('matrix')}</span></div><div className="login-feature"><MessageSquareText/><span>{t('qa')}</span></div><div className="login-feature"><Layers3/><span>{t('breakdown')} & {t('assumption')}</span></div></div><div className="login-bottom"><ShieldCheck size={16}/>{t('internal')}<span>2026</span></div></section><section className="login-access"><div className="login-locale"><LocaleSwitch/></div><div className="login-card"><span className="login-key"><KeyRound size={26}/></span><span className="eyebrow">{t('loginLabel')}</span><h2>{t('loginWelcome')}</h2><p>{t('loginSubtitle')}</p>{!configured&&<div className="setup-notice"><strong>{t('setupTitle')}</strong><p>{t('setupBody')}</p></div>}{configured&&!microsoftReady&&<div className="setup-notice" role="status"><strong>{t('ssoPendingTitle')}</strong><p>{t('ssoPendingBody')}</p></div>}{error&&<p className="error-banner" role="alert">{t(error)}</p>}<button className="button microsoft-button" disabled={!configured||!microsoftReady||busy} onClick={async()=>{setBusy(true);try{await login();}finally{setBusy(false);}}}><span className="microsoft-logo"><i/><i/><i/><i/></span>{t(busy?'connecting':'signIn')}<ArrowRight size={18}/></button><p className="login-security"><LockKeyhole size={14}/>{t('loginSecure')}</p><p className="login-session-hint">{t('sessionRememberHint')}</p>{persistenceLimited&&<p className="session-storage-notice" role="status">{t('sessionStorageLimited')}</p>}{import.meta.env.DEV&&<a className="local-preview-link" href="/?preview=1">{t('localPreview')}<ArrowRight size={15}/></a>}</div><p className="login-copyright">madison technologies · WeRide discovery</p></section></div>;
+}
+export default function App(){return <AuthProvider><ToastProvider><Gate><Suspense fallback={<Spinner/>}><AuthenticatedApp/></Suspense></Gate></ToastProvider></AuthProvider>;}

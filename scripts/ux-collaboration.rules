@@ -1,0 +1,59 @@
+    function contentPresent(v) { return v.en.size() > 0 || v.vi.size() > 0 || v.sv.size() > 0; }
+    function questionExists(id) { return exists(/databases/$(database)/documents/workspaces/weride/entries/$(id)) && get(/databases/$(database)/documents/workspaces/weride/entries/$(id)).data.kind == 'qa'; }
+    function ownQuestion(id) { return questionExists(id) && get(/databases/$(database)/documents/workspaces/weride/entries/$(id)).data.createdBy == request.auth.uid; }
+    function acceptedReply(id,questionId) {
+      let path = /databases/$(database)/documents/workspaces/weride/resolutions/$(questionId);
+      return exists(path) && get(path).data.replyId == id;
+    }
+    function validReply(d,id) {
+      return d.keys().hasAll(['id','questionId','body','originalLocale','version','createdBy','createdByName','createdAt','updatedBy','updatedByName','updatedAt'])
+        && d.keys().hasOnly(['id','questionId','body','originalLocale','version','createdBy','createdByName','createdAt','updatedBy','updatedByName','updatedAt'])
+        && d.id == id && id.size() <= 128 && d.questionId is string && questionExists(d.questionId)
+        && d.originalLocale in ['en','vi','sv'] && localized(d.body,12000) && d.body[d.originalLocale].size() > 0
+        && d.version is int && d.version > 0 && d.createdBy is string && d.createdByName is string && d.createdByName.size() <= 200
+        && d.createdAt is timestamp && d.updatedBy == request.auth.uid && d.updatedByName is string && d.updatedByName.size() <= 200 && d.updatedAt == request.time;
+    }
+    function validResolution(d,id) {
+      let reply = /databases/$(database)/documents/workspaces/weride/replies/$(d.replyId);
+      return d.keys().hasAll(['id','replyId','replyVersion','version','updatedBy','updatedByName','updatedAt'])
+        && d.keys().hasOnly(['id','replyId','replyVersion','version','updatedBy','updatedByName','updatedAt'])
+        && d.id == id && ownQuestion(id) && d.replyId is string && d.replyId.size() <= 128
+        && d.replyVersion is int && (d.replyId == '' ? d.replyVersion == 0 : exists(reply) && get(reply).data.questionId == id && get(reply).data.version == d.replyVersion)
+        && d.version is int && d.version > 0 && d.updatedBy == request.auth.uid && d.updatedByName is string && d.updatedByName.size() <= 200 && d.updatedAt == request.time;
+    }
+    function validRestore(d) {
+      let path = /databases/$(database)/documents/workspaces/weride/trash/$(d.restoredFrom);
+      let old = get(path).data;
+      let after = getAfter(path).data;
+      return d.restoredFrom is string && old.entryId == d.id && old.restoredBy == '' && after.restoredBy == request.auth.uid && after.restoredAt == request.time
+        && (old.snapshot.kind != 'qa' || old.snapshot.createdBy == request.auth.uid) && d.version == old.snapshot.version + 1
+        && d.diff(old.snapshot).affectedKeys().hasOnly(['version','updatedAt','updatedBy','updatedByName','restoredFrom']);
+    }
+    function validTrash(d,id) {
+      let entry = /databases/$(database)/documents/workspaces/weride/entries/$(d.entryId);
+      return d.keys().hasAll(['id','entryId','snapshot','deletedBy','deletedByName','deletedAt','restoredBy','restoredAt','version'])
+        && d.keys().hasOnly(['id','entryId','snapshot','deletedBy','deletedByName','deletedAt','restoredBy','restoredAt','version'])
+        && d.id == id && d.entryId is string && exists(entry) && !existsAfter(entry) && d.snapshot == get(entry).data
+        && (d.snapshot.kind != 'qa' || d.snapshot.createdBy == request.auth.uid)
+        && d.deletedBy == request.auth.uid && d.deletedByName is string && d.deletedByName.size() <= 200 && d.deletedAt == request.time
+        && d.restoredBy == '' && d.restoredAt == null && d.version == 1;
+    }
+    function restoredTrash(d,old) {
+      let entry = /databases/$(database)/documents/workspaces/weride/entries/$(old.entryId);
+      let restored = getAfter(entry).data;
+      return old.restoredBy == '' && !exists(entry) && (old.snapshot.kind != 'qa' || old.snapshot.createdBy == request.auth.uid)
+        && d.diff(old).affectedKeys().hasOnly(['version','restoredBy','restoredAt']) && d.version == old.version + 1
+        && d.restoredBy == request.auth.uid && d.restoredAt == request.time && restored.restoredFrom == old.id
+        && restored.version == old.snapshot.version + 1 && restored.updatedBy == request.auth.uid && restored.updatedAt == request.time;
+    }
+    function validDecision(d,id) {
+      return d.keys().hasAll(['id','title','body','originalLocale','state','source','ownerUid','requirementIds','version','createdBy','createdByName','createdAt','updatedBy','updatedByName','updatedAt','confirmedBy','confirmedAt'])
+        && d.keys().hasOnly(['id','title','body','originalLocale','state','source','ownerUid','requirementIds','version','createdBy','createdByName','createdAt','updatedBy','updatedByName','updatedAt','confirmedBy','confirmedAt'])
+        && d.id == id && id.size() <= 128 && d.originalLocale in ['en','vi','sv'] && localized(d.title,2000) && d.title[d.originalLocale].size() > 0 && localized(d.body,12000)
+        && d.state in ['proposed','confirmed','superseded'] && d.source is string && d.source.size() <= 4000
+        && d.ownerUid is string && d.ownerUid.size() <= 128 && (d.ownerUid == '' || eligibleAssignee(d.ownerUid))
+        && d.requirementIds is list && d.requirementIds.size() <= 30 && d.requirementIds.toSet().size() == d.requirementIds.size() && validDecisionRequirements(d.requirementIds)
+        && (d.state == 'confirmed' ? d.source.size() > 0 && d.confirmedBy == request.auth.uid && d.confirmedAt == request.time : d.confirmedBy == '' && d.confirmedAt == null)
+        && d.version is int && d.version > 0 && d.createdBy is string && d.createdByName is string && d.createdByName.size() <= 200 && d.createdAt is timestamp
+        && d.updatedBy == request.auth.uid && d.updatedByName is string && d.updatedByName.size() <= 200 && d.updatedAt == request.time;
+    }

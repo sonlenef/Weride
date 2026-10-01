@@ -1,0 +1,10 @@
+{
+  "verifiedAt": "2026-09-29T16:02:22.187Z",
+  "deployedRulesMatch": true,
+  "rulesSha256": "0e2b3ba21a1f55cd3ab8c9baec0e93e06a837d7412e3caeedb422b36483c9351",
+  "sourceRequirementsUnchanged": 30,
+  "retiredSeedQuestions": 0,
+  "anonymousCollaborationRead": "403",
+  "anonymousShareManagement": "401",
+  "testDataWritten": false
+}

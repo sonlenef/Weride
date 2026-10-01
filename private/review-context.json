@@ -1,0 +1,66 @@
+{
+  "id": "ai-review",
+  "version": 1,
+  "sections": [
+    {
+      "id": "delivery",
+      "authority": "rfp",
+      "source": "WERIDE-RFP-2026-Version 3 · §1 / §1.1 / §1.2 · printed p.3",
+      "title": {
+        "en": "Delivery tiers and procurement pathways",
+        "vi": "Các mức triển khai và phương án cung cấp",
+        "sv": "Leveransnivåer och upphandlingsalternativ"
+      },
+      "body": {
+        "en": "Weride Sweden AB is procuring an enterprise cloud ride-hailing and taxi dispatch software platform. L1 (Baseline Core / Launch MVP) includes core functional modules and mandatory regulatory capabilities for commercial launch, with controlled initial TCO. L2 (Expansion Package) comprises advanced optimization tools, AI features, secondary partner integrations and enhancements planned for post-launch investment. Vendors may propose Option A: COTS / white-label mapping plus customization delta, Option B: fully custom platform build, or both. This is the RFP framework, not an approved Madison delivery commitment.",
+        "vi": "Weride Sweden AB đang mua sắm nền tảng cloud doanh nghiệp cho gọi xe và điều phối taxi. L1 (Baseline Core / Launch MVP) bao gồm chức năng cốt lõi và năng lực tuân thủ bắt buộc để ra mắt thương mại, kiểm soát TCO ban đầu. L2 (Expansion Package) gồm tối ưu nâng cao, AI, tích hợp đối tác thứ cấp và cải tiến đầu tư sau ra mắt. Vendor có thể đề xuất Option A: ánh xạ COTS/white-label và phần tùy chỉnh, Option B: xây mới hoàn toàn, hoặc cả hai. Đây là khung RFP, không phải cam kết triển khai đã được duyệt của Madison.",
+        "sv": "Weride Sweden AB upphandlar en molnbaserad företagsplattform för taxibokning och trafikledning. L1 (Baseline Core / Launch MVP) omfattar kärnfunktioner och obligatoriska regelefterlevnadsfunktioner för kommersiell lansering med kontrollerad initial TCO. L2 (Expansion Package) omfattar avancerad optimering, AI, sekundära partnerintegrationer och förbättringar efter lansering. Leverantörer kan föreslå alternativ A: COTS/white-label med anpassningsdelta, alternativ B: helt kundanpassad utveckling, eller båda. Detta är RFP-ramverket, inte ett godkänt leveransåtagande från Madison."
+      }
+    },
+    {
+      "id": "ecosystem",
+      "authority": "rfp",
+      "source": "WERIDE-RFP-2026-Version 3 · §1.3 · printed pp.3–4",
+      "title": {
+        "en": "Required system ecosystem",
+        "vi": "Hệ sinh thái hệ thống được yêu cầu",
+        "sv": "Efterfrågat systemekosystem"
+      },
+      "body": {
+        "en": "The specified interconnected subsystems are: Web Admin & Master Dispatch Console; Driver Mobile Application (iOS & Android); Passenger Mobile Application (iOS & Android); Hotel Concierge & Reception Dashboard; Supplier & Carrier Portal; OTA & Partner Integration Hub; Regulatory, Tax & Accounting Module; Microsoft 365 Enterprise Ecosystem Integration. The detailed matrix assigns tiers per requirement; an integration listed in the ecosystem is not automatically L1. This discovery workspace is a discussion tool, not the delivered taxi platform.",
+        "vi": "Các phân hệ liên kết trong RFP: Web Admin & Master Dispatch Console; ứng dụng tài xế iOS/Android; ứng dụng hành khách iOS/Android; dashboard concierge/lễ tân khách sạn; Supplier & Carrier Portal; OTA & Partner Integration Hub; module pháp lý, thuế và kế toán; tích hợp hệ sinh thái Microsoft 365 doanh nghiệp. Ma trận chi tiết quy định tier của từng yêu cầu; việc xuất hiện trong hệ sinh thái không đồng nghĩa tích hợp đó thuộc L1. Workspace discovery là công cụ thảo luận, không phải nền tảng taxi bàn giao.",
+        "sv": "De sammankopplade delsystemen i RFP:n är: Web Admin & Master Dispatch Console; förarapp för iOS/Android; passagerarapp för iOS/Android; hotellens concierge- och receptionsdashboard; Supplier & Carrier Portal; OTA & Partner Integration Hub; modul för regler, skatt och redovisning; integration med Microsoft 365. Den detaljerade matrisen anger nivå per krav; en integration i ekosystemet är inte automatiskt L1. Discovery-arbetsytan är ett diskussionsverktyg, inte den levererade taxiplattformen."
+      }
+    },
+    {
+      "id": "compliance",
+      "authority": "rfp",
+      "source": "WERIDE-RFP-2026-Version 3 · §2 / §2.1 · printed p.5",
+      "title": {
+        "en": "Compliance codes and tier interpretation",
+        "vi": "Mã compliance và cách hiểu tier",
+        "sv": "Efterlevnadskoder och tolkning av nivåer"
+      },
+      "body": {
+        "en": "FC = Fully Compliant, out of the box: supported natively in the standard current production software release. PC = Partially Compliant: supported through configuration, minor modification or a standard third-party plugin. RD = Roadmap Feature under active development: state the exact planned release date. CU = Custom Development Required: capability does not exist out of the box but can be built specifically; provide estimated development hours and cost. NC = Non-Compliant: unsupported and cannot be provided. L1 is mandatory for initial deployment; L2 is a separately priced enhancement. Being technically buildable is not evidence for FC. Preserve blank assessments as not assessed.",
+        "vi": "FC = Fully Compliant, có sẵn: được hỗ trợ sẵn trong bản phần mềm production tiêu chuẩn hiện tại. PC = Partially Compliant: đáp ứng qua cấu hình, thay đổi nhỏ hoặc plugin bên thứ ba tiêu chuẩn. RD = Roadmap Feature đang phát triển: nêu ngày phát hành dự kiến chính xác. CU = Custom Development Required: chưa có sẵn nhưng có thể xây riêng; cung cấp giờ và chi phí phát triển ước tính. NC = Non-Compliant: không hỗ trợ và không thể cung cấp. L1 bắt buộc cho triển khai ban đầu; L2 là cải tiến báo giá riêng. Khả năng có thể xây không phải bằng chứng FC. Ô trống giữ là chưa đánh giá.",
+        "sv": "FC = Fully Compliant, färdigt stöd i den aktuella standardversionen i produktion. PC = Partially Compliant: stöd via konfiguration, mindre ändring eller standardinsticksprogram. RD = Roadmap Feature under aktiv utveckling: ange exakt planerat releasedatum. CU = Custom Development Required: finns inte färdigt men kan byggas särskilt; ange uppskattade utvecklingstimmar och kostnad. NC = Non-Compliant: stöds inte och kan inte levereras. L1 är obligatoriskt vid initial driftsättning; L2 prissätts separat. Att något går att bygga är inte bevis för FC. Tomma bedömningar ska förbli ej bedömda."
+      }
+    },
+    {
+      "id": "source-control",
+      "authority": "rfp",
+      "source": "WERIDE-RFP-2026-Version 3 · How to complete · printed p.2; §5 · printed p.13",
+      "title": {
+        "en": "Source control and vendor response rules",
+        "vi": "Bảo toàn nguồn và quy tắc phản hồi vendor",
+        "sv": "Källkontroll och regler för leverantörssvar"
+      },
+      "body": {
+        "en": "The specification text and pre-filled cells are locked. Vendor responses belong in the designated compliance and comment fields. RD responses require a release date; CU responses require estimated hours and cost. The L1 gap worksheet references requirement IDs for PC, RD and CU, with the document labeling it mandatory for Option A bidders addressing L1 gaps. Commercial amounts use SEK or EUR, excluding Swedish VAT and one consistent currency. Do not silently rewrite source requirements or turn draft estimates into commercial commitments.",
+        "vi": "Nội dung đặc tả và ô điền sẵn được khóa. Vendor phản hồi ở ô compliance và bình luận được chỉ định. RD cần ngày phát hành; CU cần giờ và chi phí ước tính. Bảng gap L1 tham chiếu ID của các mục PC, RD, CU; tài liệu ghi bắt buộc với Option A có gap L1. Giá thương mại dùng SEK hoặc EUR, chưa bao gồm VAT Thụy Điển và thống nhất một loại tiền. Không tự viết lại yêu cầu nguồn hoặc biến ước tính nháp thành cam kết thương mại.",
+        "sv": "Specifikationstext och förifyllda celler är låsta. Leverantörssvar hör hemma i avsedda efterlevnads- och kommentarsfält. RD kräver releasedatum; CU kräver uppskattade timmar och kostnad. L1-gapbladet hänvisar till krav-ID för PC, RD och CU och anges vara obligatoriskt för alternativ A med L1-gap. Kommersiella belopp ska anges i SEK eller EUR, exklusive svensk moms och i en konsekvent valuta. Skriv inte om källkrav i tysthet och gör inte utkast till kommersiella åtaganden."
+      }
+    }
+  ]
+}

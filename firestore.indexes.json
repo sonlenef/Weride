@@ -1,0 +1,10 @@
+{
+  "indexes": [],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "reviewShares",
+      "fieldPath": "pack",
+      "indexes": []
+    }
+  ]
+}

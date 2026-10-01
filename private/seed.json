@@ -1,0 +1,6019 @@
+{
+  "schemaVersion": 1,
+  "project": {
+    "id": "weride",
+    "name": "WeRide",
+    "client": "Weride Sweden AB",
+    "reference": "WERIDE-RFP-2026-Version 3",
+    "sourceFile": "WeRide Discovery & Vendor RFP Package 2026 1.pdf",
+    "summary": {
+      "en": "Next-generation ride-hailing, dispatch and fleet operations. One shared space to turn the RFP into a clear, reviewable delivery scope.",
+      "vi": "Nền tảng gọi xe, điều phối và vận hành đội xe thế hệ mới. Không gian chung chuyển RFP thành phạm vi triển khai rõ ràng, có thể rà soát.",
+      "sv": "Nästa generations plattform för taxibokning, trafikledning och flottverksamhet. En gemensam plats för att omvandla RFP:n till en tydlig och granskningsbar leveransomfattning."
+    },
+    "fleetReference": 150,
+    "fleetReferencePage": 15,
+    "milestones": [
+      {
+        "key": "released",
+        "date": "2026-09-25",
+        "page": 0
+      },
+      {
+        "key": "intent",
+        "date": "2026-10-05",
+        "page": 0
+      },
+      {
+        "key": "questions",
+        "date": "2026-10-10",
+        "page": 0
+      },
+      {
+        "key": "submission",
+        "date": "2026-10-14",
+        "time": "17:00 CET",
+        "page": 0
+      },
+      {
+        "key": "award",
+        "date": "2026-10-20",
+        "page": 0
+      }
+    ],
+    "clarifications": [
+      {
+        "id": "deadline",
+        "title": {
+          "en": "Submission date conflict",
+          "vi": "Mâu thuẫn hạn nộp",
+          "sv": "Motstridigt inlämningsdatum"
+        },
+        "body": {
+          "en": "Cover: 14 October 2026, 17:00 CET. Section 5.0: 30 October 2026. Confirm the deadline and time zone with Weride; neither is silently substituted.",
+          "vi": "Trang bìa: 14/10/2026, 17:00 CET. Mục 5.0: 30/10/2026. Cần Weride xác nhận hạn và múi giờ; không tự thay thế.",
+          "sv": "Omslag: 14 oktober 2026, 17:00 CET. Avsnitt 5.0: 30 oktober 2026. Bekräfta datum och tidszon med Weride; inget ersätts utan beslut."
+        },
+        "pages": "Cover / §5.0, p.13"
+      },
+      {
+        "id": "expansion",
+        "title": {
+          "en": "L2 matrix / pricing-table mismatch",
+          "vi": "Lệch matrix L2 và bảng báo giá",
+          "sv": "Avvikelse mellan L2-matris och pristabell"
+        },
+        "body": {
+          "en": "Section 3 contains EXP-DRV-01 (in-app economy). Section 5.4 instead contains EXP-TAX-01 (Digital Driving Log / Körjournal), which has no requirement row in Section 3. The matrix remains unchanged.",
+          "vi": "Mục 3 có EXP-DRV-01 (hệ kinh tế trong app). Mục 5.4 lại có EXP-TAX-01 (nhật ký lái xe / Körjournal), không có dòng yêu cầu ở mục 3. Giữ nguyên matrix.",
+          "sv": "Avsnitt 3 innehåller EXP-DRV-01 (ekonomi i appen). Avsnitt 5.4 innehåller i stället EXP-TAX-01 (digital körjournal), som saknar kravrad i avsnitt 3. Matrisen lämnas oförändrad."
+        },
+        "pages": "§3, p.11 / §5.4, p.16"
+      }
+    ]
+  },
+  "requirements": [
+    {
+      "id": "FN-BKG-01",
+      "module": "A",
+      "tier": "L1",
+      "sourcePage": 6,
+      "sourceSection": "3",
+      "title": {
+        "en": "Multi-Channel Booking Intake",
+        "vi": "Tiếp nhận đặt xe đa kênh",
+        "sv": "Bokningsmottagning via flera kanaler"
+      },
+      "description": {
+        "en": "Support ride requests from mobile apps, web dispatch console, hotel portals, and partner (OTA) APIs.",
+        "vi": "Hỗ trợ yêu cầu đặt xe từ ứng dụng di động, bảng điều phối web, cổng khách sạn và API đối tác (OTA).",
+        "sv": "Stöd för resebeställningar från mobilappar, webbaserad trafikledning, hotellportaler och partner-API:er (OTA)."
+      },
+      "order": 1
+    },
+    {
+      "id": "FN-BKG-02",
+      "module": "A",
+      "tier": "L1",
+      "sourcePage": 6,
+      "sourceSection": "3",
+      "title": {
+        "en": "Dynamic Upfront Fare Calculation",
+        "vi": "Tính giá trước chuyến đi linh hoạt",
+        "sv": "Dynamisk beräkning av förhandspris"
+      },
+      "description": {
+        "en": "Upfront pricing engine supporting base rates, distance/time pricing, zone rates, and surge multipliers.",
+        "vi": "Bộ máy tính giá trước chuyến đi hỗ trợ giá cơ bản, theo quãng đường/thời gian, theo vùng và hệ số tăng giá.",
+        "sv": "Motor för förhandspriser med grundpris, avstånds-/tidspris, zonpriser och efterfrågemultiplikatorer."
+      },
+      "order": 2
+    },
+    {
+      "id": "FN-DIS-01",
+      "module": "A",
+      "tier": "L1",
+      "sourcePage": 6,
+      "sourceSection": "3",
+      "title": {
+        "en": "Automated & Dynamic Dispatching",
+        "vi": "Điều phối tự động và linh hoạt",
+        "sv": "Automatiserad och dynamisk trafikledning"
+      },
+      "description": {
+        "en": "Algorithmic driver matching based on driver proximity, vehicle class, and zone queue position.",
+        "vi": "Ghép tài xế bằng thuật toán theo khoảng cách, hạng xe và vị trí trong hàng đợi vùng.",
+        "sv": "Algoritmisk förarmatchning baserad på närhet, fordonsklass och köposition inom zonen."
+      },
+      "order": 3
+    },
+    {
+      "id": "FN-DIS-02",
+      "module": "A",
+      "tier": "L1",
+      "sourcePage": 6,
+      "sourceSection": "3",
+      "title": {
+        "en": "Live Dispatch Console & Map View",
+        "vi": "Bảng điều phối trực tiếp và bản đồ",
+        "sv": "Trafikledningskonsol och karta i realtid"
+      },
+      "description": {
+        "en": "Real-time map rendering active vehicles, trip statuses, and manual dispatcher override capabilities. Trip logs with arrival/finished time and lat/lon position.",
+        "vi": "Bản đồ thời gian thực hiển thị xe hoạt động, trạng thái chuyến và khả năng ghi đè thủ công của điều phối viên. Nhật ký chuyến có giờ đến/kết thúc và vị trí vĩ độ/kinh độ.",
+        "sv": "Realtidskarta över aktiva fordon, resestatus och möjlighet till manuell omstyrning. Reseloggar med ankomst-/sluttid och latitud/longitud."
+      },
+      "order": 4
+    },
+    {
+      "id": "FN-DRV-01",
+      "module": "A",
+      "tier": "L1",
+      "sourcePage": 6,
+      "sourceSection": "3",
+      "title": {
+        "en": "Driver Mobile Application",
+        "vi": "Ứng dụng di động tài xế",
+        "sv": "Mobilapp för förare"
+      },
+      "description": {
+        "en": "Native/cross-platform app featuring trip offer cards (marketplace), execution workflow, and earnings summaries.",
+        "vi": "Ứng dụng native/đa nền tảng có thẻ mời chuyến (marketplace), quy trình thực hiện chuyến và tổng hợp thu nhập.",
+        "sv": "Inbyggd/plattformsöverskridande app med reserbjudanden (marknadsplats), arbetsflöde och intäktsöversikter."
+      },
+      "order": 5
+    },
+    {
+      "id": "FN-DRV-02",
+      "module": "A",
+      "tier": "L1",
+      "sourcePage": 6,
+      "sourceSection": "3",
+      "title": {
+        "en": "Navigation Handoff",
+        "vi": "Chuyển tiếp điều hướng",
+        "sv": "Överlämning till navigering"
+      },
+      "description": {
+        "en": "Direct one-tap handoff from driver app to external/built in navigation.",
+        "vi": "Chuyển tiếp một chạm từ ứng dụng tài xế sang điều hướng bên ngoài/tích hợp.",
+        "sv": "Direkt överlämning med ett tryck från förarappen till extern/inbyggd navigering."
+      },
+      "order": 6
+    },
+    {
+      "id": "FN-PAS-01",
+      "module": "A",
+      "tier": "L1",
+      "sourcePage": 6,
+      "sourceSection": "3",
+      "title": {
+        "en": "Passenger Mobile App",
+        "vi": "Ứng dụng di động hành khách",
+        "sv": "Mobilapp för passagerare"
+      },
+      "description": {
+        "en": "Native/cross-platform app supporting instant/advance bookings, live ETA tracking, and driver/vehicle details.",
+        "vi": "Ứng dụng native/đa nền tảng hỗ trợ đặt ngay/đặt trước, theo dõi ETA trực tiếp và thông tin tài xế/xe.",
+        "sv": "Inbyggd/plattformsöverskridande app för direkt- och förhandsbokning, ETA-spårning i realtid samt förar-/fordonsuppgifter."
+      },
+      "order": 7
+    },
+    {
+      "id": "FN-PAS-02",
+      "module": "A",
+      "tier": "L1",
+      "sourcePage": 7,
+      "sourceSection": "3",
+      "title": {
+        "en": "Swedish Digital Payments",
+        "vi": "Thanh toán số tại Thụy Điển",
+        "sv": "Svenska digitala betalningar"
+      },
+      "description": {
+        "en": "In-app credit/debit card tokenization (Stripe/Adyen) and native Swedish Swish e-commerce payment API.",
+        "vi": "Token hoá thẻ tín dụng/ghi nợ trong ứng dụng (Stripe/Adyen) và API thanh toán thương mại điện tử Swish của Thụy Điển.",
+        "sv": "Tokenisering av kredit-/betalkort i appen (Stripe/Adyen) och det svenska Swish-API:et för e-handel."
+      },
+      "order": 8
+    },
+    {
+      "id": "FN-COM-01",
+      "module": "A",
+      "tier": "L1",
+      "sourcePage": 7,
+      "sourceSection": "3",
+      "title": {
+        "en": "In-App Messaging & Masked Calling",
+        "vi": "Nhắn tin trong ứng dụng và gọi ẩn số",
+        "sv": "Meddelanden i appen och maskerade samtal"
+      },
+      "description": {
+        "en": "Centralized cross-platform text messaging and proxy phone number masking between rider, driver, and dispatcher.",
+        "vi": "Nhắn tin văn bản tập trung đa nền tảng và che số điện thoại qua số trung gian giữa hành khách, tài xế và điều phối viên.",
+        "sv": "Centraliserade textmeddelanden över plattformar och maskering av telefonnummer via proxy mellan passagerare, förare och trafikledare."
+      },
+      "order": 9
+    },
+    {
+      "id": "FN-HTL-01",
+      "module": "A",
+      "tier": "L1",
+      "sourcePage": 7,
+      "sourceSection": "3",
+      "title": {
+        "en": "Hotel Concierge Portal",
+        "vi": "Cổng lễ tân khách sạn",
+        "sv": "Hotellportal för concierge"
+      },
+      "description": {
+        "en": "Simplified web portal for hotel/corporate staff to order guest rides, track ETAs, and charge to room or corporate accounts.",
+        "vi": "Cổng web đơn giản cho nhân viên khách sạn/doanh nghiệp đặt xe cho khách, theo dõi ETA và tính phí vào phòng hoặc tài khoản doanh nghiệp.",
+        "sv": "Förenklad webbportal för hotell-/företagspersonal att beställa gästresor, följa ETA och debitera rum eller företagskonton."
+      },
+      "order": 10
+    },
+    {
+      "id": "FN-SUP-01",
+      "module": "A",
+      "tier": "L1",
+      "sourcePage": 7,
+      "sourceSection": "3",
+      "title": {
+        "en": "Fleet Carrier Portal",
+        "vi": "Cổng đối tác đội xe",
+        "sv": "Portal för åkerier"
+      },
+      "description": {
+        "en": "Web portal for third-party fleet owners (carriers) to manage sub-fleets, driver documentation, and payouts.",
+        "vi": "Cổng web cho chủ đội xe bên thứ ba quản lý đội xe con, hồ sơ tài xế và chi trả.",
+        "sv": "Webbportal för externa flottägare (åkerier) för hantering av underflottor, förardokumentation och utbetalningar."
+      },
+      "order": 11
+    },
+    {
+      "id": "FN-VOU-01",
+      "module": "A",
+      "tier": "L1",
+      "sourcePage": 7,
+      "sourceSection": "3",
+      "title": {
+        "en": "Voucher & Promotion Engine",
+        "vi": "Bộ máy voucher và khuyến mãi",
+        "sv": "Motor för kuponger och kampanjer"
+      },
+      "description": {
+        "en": "Admin tool to generate discount vouchers and promo codes with checkout redemption in the passenger app.",
+        "vi": "Công cụ quản trị tạo voucher giảm giá và mã khuyến mãi để sử dụng khi thanh toán trong ứng dụng hành khách.",
+        "sv": "Administrationsverktyg för rabattkuponger och kampanjkoder som löses in i passagerarappens kassa."
+      },
+      "order": 12
+    },
+    {
+      "id": "FN-INT-01",
+      "module": "A",
+      "tier": "L1",
+      "sourcePage": 7,
+      "sourceSection": "3",
+      "title": {
+        "en": "Microsoft Entra ID SSO",
+        "vi": "Đăng nhập một lần Microsoft Entra ID",
+        "sv": "Microsoft Entra ID SSO"
+      },
+      "description": {
+        "en": "Single Sign-On (SSO) authentication for administrative and dispatch users via corporate Microsoft Entra ID.",
+        "vi": "Xác thực đăng nhập một lần (SSO) cho người dùng quản trị và điều phối qua Microsoft Entra ID doanh nghiệp.",
+        "sv": "Enkel inloggning (SSO) för administratörer och trafikledare via företagets Microsoft Entra ID."
+      },
+      "order": 13
+    },
+    {
+      "id": "REG-PWD-01",
+      "module": "B",
+      "tier": "L1",
+      "sourcePage": 8,
+      "sourceSection": "3",
+      "title": {
+        "en": "Algorithmic Disclosures Portal",
+        "vi": "Cổng công bố thông tin thuật toán",
+        "sv": "Portal för algoritmisk transparens"
+      },
+      "description": {
+        "en": "In-app driver interface presenting automated written disclosures detailing algorithmic task allocation parameters, performance tracking, and rating impacts.",
+        "vi": "Giao diện trong ứng dụng tài xế trình bày công bố bằng văn bản tự động về tham số phân công thuật toán, theo dõi hiệu suất và tác động của đánh giá.",
+        "sv": "Förargränssnitt i appen med automatiska skriftliga upplysningar om algoritmisk uppgiftsfördelning, prestationsuppföljning och betygspåverkan."
+      },
+      "order": 14
+    },
+    {
+      "id": "REG-PWD-02",
+      "module": "B",
+      "tier": "L1",
+      "sourcePage": 8,
+      "sourceSection": "3",
+      "title": {
+        "en": "Human Oversight Console",
+        "vi": "Bảng giám sát của con người",
+        "sv": "Konsol för mänsklig tillsyn"
+      },
+      "description": {
+        "en": "Administrative rule engine ensuring automated algorithms cannot execute driver account suspensions, financial penalties, or terminations without mandatory human dispatcher review and approval.",
+        "vi": "Bộ quy tắc quản trị bảo đảm thuật toán không đình chỉ tài khoản tài xế, phạt tài chính hay chấm dứt nếu chưa được điều phối viên xem xét và phê duyệt bắt buộc.",
+        "sv": "Administrativ regelmotor som hindrar algoritmer från att stänga av förarkonton, utfärda ekonomiska påföljder eller avsluta konton utan obligatorisk mänsklig granskning och godkännande."
+      },
+      "order": 15
+    },
+    {
+      "id": "REG-PWD-03",
+      "module": "B",
+      "tier": "L1",
+      "sourcePage": 8,
+      "sourceSection": "3",
+      "title": {
+        "en": "Decision Explanation & Appeal SLA",
+        "vi": "Giải thích quyết định và SLA khiếu nại",
+        "sv": "Beslutsförklaring och SLA för överklaganden"
+      },
+      "description": {
+        "en": "Integrated ticketing console managing driver requests for explanations of automated decisions, tracking compliance against statutory review deadlines.",
+        "vi": "Bảng quản lý yêu cầu tích hợp cho tài xế yêu cầu giải thích quyết định tự động và theo dõi đáp ứng thời hạn rà soát theo luật.",
+        "sv": "Integrerad ärendekonsol för förares begäran om förklaring av automatiserade beslut och uppföljning av lagstadgade granskningstider."
+      },
+      "order": 16
+    },
+    {
+      "id": "REG-PWD-04",
+      "module": "B",
+      "tier": "L1",
+      "sourcePage": 8,
+      "sourceSection": "3",
+      "title": {
+        "en": "Offline Telemetry Hard Stop",
+        "vi": "Dừng cứng thu thập dữ liệu khi ngoại tuyến",
+        "sv": "Absolut stopp för telemetri offline"
+      },
+      "description": {
+        "en": "Enforced software block preventing location tracking or background data collection whenever the driver application is in an offline or logged-off state.",
+        "vi": "Chặn bắt buộc ở phần mềm để ngăn theo dõi vị trí hoặc thu thập dữ liệu nền khi ứng dụng tài xế ở trạng thái ngoại tuyến hoặc đã đăng xuất.",
+        "sv": "Tvingande programvaruspärr som förhindrar positionsspårning och bakgrundsinsamling när förarappen är offline eller utloggad."
+      },
+      "order": 17
+    },
+    {
+      "id": "REG-PWD-05",
+      "module": "B",
+      "tier": "L1",
+      "sourcePage": 8,
+      "sourceSection": "3",
+      "title": {
+        "en": "Arbetsmiljöverket Reporting Export",
+        "vi": "Xuất báo cáo Arbetsmiljöverket",
+        "sv": "Rapportexport till Arbetsmiljöverket"
+      },
+      "description": {
+        "en": "Automated reporting module extracting platform worker counts, contract classifications, and operational conditions for Swedish authorities (Arbetsmiljöverket).",
+        "vi": "Module báo cáo tự động trích xuất số lao động nền tảng, phân loại hợp đồng và điều kiện vận hành cho cơ quan Thụy Điển (Arbetsmiljöverket).",
+        "sv": "Automatisk rapportmodul som tar fram antal plattformsarbetare, kontraktsklassificeringar och verksamhetsvillkor för svenska myndigheter (Arbetsmiljöverket)."
+      },
+      "order": 18
+    },
+    {
+      "id": "REG-DAC-01",
+      "module": "B",
+      "tier": "L1",
+      "sourcePage": 9,
+      "sourceSection": "3",
+      "title": {
+        "en": "DAC 7 Identity Vault",
+        "vi": "Kho định danh DAC 7",
+        "sv": "Identitetsvalv för DAC 7"
+      },
+      "description": {
+        "en": "Secure storage capturing reportable driver data: Name, Address, Tax Identification Number (Personnummer/Organisationsnummer), VAT ID, DOB, and primary bank details.",
+        "vi": "Lưu trữ an toàn dữ liệu tài xế cần báo cáo: tên, địa chỉ, mã số thuế (Personnummer/Organisationsnummer), mã VAT, ngày sinh và thông tin ngân hàng chính.",
+        "sv": "Säker lagring av rapporterbara föraruppgifter: namn, adress, skatte-ID (personnummer/organisationsnummer), moms-ID, födelsedatum och huvudsakliga bankuppgifter."
+      },
+      "order": 19
+    },
+    {
+      "id": "REG-DAC-02",
+      "module": "B",
+      "tier": "L1",
+      "sourcePage": 9,
+      "sourceSection": "3",
+      "title": {
+        "en": "DAC 7 Activity Ledger",
+        "vi": "Sổ hoạt động DAC 7",
+        "sv": "Aktivitetsbokföring för DAC 7"
+      },
+      "description": {
+        "en": "Ledger tracking individual quarterly consideration paid, completed trip counts, and Weride platform fee deductions.",
+        "vi": "Sổ theo dõi khoản chi trả theo quý cho từng cá nhân, số chuyến hoàn thành và khoản khấu trừ phí nền tảng Weride.",
+        "sv": "Huvudbok som följer individuell kvartalsersättning, antal genomförda resor och avdrag för Werides plattformsavgifter."
+      },
+      "order": 20
+    },
+    {
+      "id": "REG-DAC-03",
+      "module": "B",
+      "tier": "L1",
+      "sourcePage": 9,
+      "sourceSection": "3",
+      "title": {
+        "en": "Skatteverket DAC 7 XML Exporter",
+        "vi": "Xuất XML DAC 7 cho Skatteverket",
+        "sv": "XML-export för DAC 7 till Skatteverket"
+      },
+      "description": {
+        "en": "One-click generator exporting annual platform tax data formatted strictly to official Skatteverket DAC 7 XML schemas.",
+        "vi": "Công cụ một chạm xuất dữ liệu thuế nền tảng hàng năm đúng định dạng schema XML DAC 7 chính thức của Skatteverket.",
+        "sv": "Enklicksgenerator som exporterar årliga plattformsskattedata strikt enligt Skatteverkets officiella DAC 7 XML-scheman."
+      },
+      "order": 21
+    },
+    {
+      "id": "REG-SWE-01",
+      "module": "B",
+      "tier": "L1",
+      "sourcePage": 9,
+      "sourceSection": "3",
+      "title": {
+        "en": "Prop. 2017/18:239 Audit Control Log",
+        "vi": "Nhật ký kiểm toán theo Prop. 2017/18:239",
+        "sv": "Kontrollogg enligt Prop. 2017/18:239"
+      },
+      "description": {
+        "en": "Encrypted, tamper-proof pre-booking audit log recording pre-agreed pricing, route GPS coordinates, driver ID, and timestamps for taximeter-exempt operation.",
+        "vi": "Nhật ký kiểm toán đặt trước được mã hoá, chống sửa đổi, lưu giá thoả thuận trước, toạ độ GPS lộ trình, mã tài xế và dấu thời gian cho vận hành miễn đồng hồ tính cước.",
+        "sv": "Krypterad, manipulationssäker förbokningslogg med förhandsavtalat pris, GPS-rutt, förar-ID och tidsstämplar för taxameterbefriad drift."
+      },
+      "order": 22
+    },
+    {
+      "id": "REG-SWE-02",
+      "module": "B",
+      "tier": "L1",
+      "sourcePage": 9,
+      "sourceSection": "3",
+      "title": {
+        "en": "Multi-Tier Split VAT Engine",
+        "vi": "Bộ máy VAT tách theo nhóm dịch vụ",
+        "sv": "Motor för uppdelad moms i flera nivåer"
+      },
+      "description": {
+        "en": "Automated calculation engine applying 6% VAT for passenger transport services versus 25% VAT for parcel/courier deliveries.",
+        "vi": "Bộ tính tự động áp dụng VAT 6% cho vận tải hành khách và 25% cho giao bưu kiện/chuyển phát.",
+        "sv": "Automatisk beräkningsmotor som tillämpar 6 % moms för persontransporter och 25 % för paket-/budleveranser."
+      },
+      "order": 23
+    },
+    {
+      "id": "REG-SWE-03",
+      "module": "B",
+      "tier": "L1",
+      "sourcePage": 10,
+      "sourceSection": "3",
+      "title": {
+        "en": "Fortnox/Stripe Accounting Export",
+        "vi": "Xuất kế toán Fortnox/Stripe",
+        "sv": "Redovisningsexport till Fortnox/Stripe"
+      },
+      "description": {
+        "en": "Automated transaction export routines feeding daily/bi-weekly sales and commission ledgers directly into Fortnox/Stripe accounting software, based on the payout cycle.",
+        "vi": "Quy trình tự động xuất giao dịch vào sổ doanh thu và hoa hồng hàng ngày/hai tuần một lần của Fortnox/Stripe theo chu kỳ chi trả.",
+        "sv": "Automatisk transaktionsexport av försäljnings- och provisionsböcker dagligen/varannan vecka direkt till Fortnox/Stripe enligt utbetalningscykeln."
+      },
+      "order": 24
+    },
+    {
+      "id": "EXP-AI-01",
+      "module": "C",
+      "tier": "L2",
+      "sourcePage": 11,
+      "sourceSection": "3",
+      "title": {
+        "en": "Predictive Demand Heatmaps",
+        "vi": "Bản đồ nhiệt dự báo nhu cầu",
+        "sv": "Prognostiska efterfrågekartor"
+      },
+      "description": {
+        "en": "AI model overlaying historical trip density and local events to forecast high-demand zones.",
+        "vi": "Mô hình AI kết hợp mật độ chuyến lịch sử và sự kiện địa phương để dự báo vùng nhu cầu cao.",
+        "sv": "AI-modell som kombinerar historisk resetäthet och lokala evenemang för att prognostisera hög efterfrågan."
+      },
+      "order": 25
+    },
+    {
+      "id": "EXP-FLT-01",
+      "module": "C",
+      "tier": "L2",
+      "sourcePage": 11,
+      "sourceSection": "3",
+      "title": {
+        "en": "Automated Flight Tracking Sync",
+        "vi": "Đồng bộ theo dõi chuyến bay tự động",
+        "sv": "Automatisk synkronisering av flygspårning"
+      },
+      "description": {
+        "en": "Flight tracking integration to automatically update pickup times and dispatch alerts based on real-time flight delays.",
+        "vi": "Tích hợp theo dõi chuyến bay để tự động cập nhật giờ đón và cảnh báo điều phối theo chậm chuyến thời gian thực.",
+        "sv": "Flygspårningsintegration som automatiskt uppdaterar hämtningstider och trafikledningslarm utifrån flygförseningar i realtid."
+      },
+      "order": 26
+    },
+    {
+      "id": "EXP-M365-01",
+      "module": "C",
+      "tier": "L2",
+      "sourcePage": 11,
+      "sourceSection": "3",
+      "title": {
+        "en": "Outlook Graph API Calendar Sync",
+        "vi": "Đồng bộ lịch Outlook qua Graph API",
+        "sv": "Outlook-kalendersynk via Graph API"
+      },
+      "description": {
+        "en": "Automated conversion of executive Outlook calendar appointments into scheduled ride bookings via Microsoft Graph API.",
+        "vi": "Tự động chuyển lịch hẹn Outlook của lãnh đạo thành chuyến xe đặt trước qua Microsoft Graph API.",
+        "sv": "Automatisk omvandling av chefers Outlook-möten till schemalagda resebokningar via Microsoft Graph API."
+      },
+      "order": 27
+    },
+    {
+      "id": "EXP-M365-02",
+      "module": "C",
+      "tier": "L2",
+      "sourcePage": 11,
+      "sourceSection": "3",
+      "title": {
+        "en": "Power BI & Teams Emergency Pipelines",
+        "vi": "Luồng Power BI và cảnh báo khẩn Teams",
+        "sv": "Power BI-flöden och nödlarm i Teams"
+      },
+      "description": {
+        "en": "Continuous data pipelines feeding real-time operations into Power BI dashboards and routing panic triggers to Microsoft Teams channels.",
+        "vi": "Luồng dữ liệu liên tục đưa vận hành thời gian thực lên Power BI và chuyển kích hoạt khẩn cấp đến kênh Microsoft Teams.",
+        "sv": "Kontinuerliga dataflöden till Power BI-paneler i realtid och vidarebefordran av paniklarm till Microsoft Teams-kanaler."
+      },
+      "order": 28
+    },
+    {
+      "id": "EXP-PAS-01",
+      "module": "C",
+      "tier": "L2",
+      "sourcePage": 11,
+      "sourceSection": "3",
+      "title": {
+        "en": "In-App Fare Splitting",
+        "vi": "Chia cước trong ứng dụng",
+        "sv": "Delning av resekostnad i appen"
+      },
+      "description": {
+        "en": "Passenger app feature allowing riders to divide trip costs with other app users during an active ride.",
+        "vi": "Tính năng hành khách chia chi phí chuyến đi với người dùng ứng dụng khác khi chuyến đang diễn ra.",
+        "sv": "Funktion i passagerarappen för att dela resekostnaden med andra appanvändare under en pågående resa."
+      },
+      "order": 29
+    },
+    {
+      "id": "EXP-DRV-01",
+      "module": "C",
+      "tier": "L2",
+      "sourcePage": 11,
+      "sourceSection": "3",
+      "title": {
+        "en": "In-app economy (driver and passenger app)",
+        "vi": "Hệ kinh tế trong ứng dụng tài xế và hành khách",
+        "sv": "Ekonomi i förar- och passagerarappen"
+      },
+      "description": {
+        "en": "Configurable in-app points and subscription economy enabling drivers and passengers to earn, spend, receive, or redeem points based on booking activity, demand, behavior, and subscription tier, with dynamic incentives, access privileges, rewards, and administrative rule controls.",
+        "vi": "Hệ điểm và gói đăng ký có cấu hình cho phép tài xế/hành khách kiếm, chi, nhận hoặc đổi điểm theo hoạt động đặt xe, nhu cầu, hành vi và hạng đăng ký; có ưu đãi linh hoạt, đặc quyền truy cập, phần thưởng và quản trị quy tắc.",
+        "sv": "Konfigurerbar poäng- och prenumerationsekonomi där förare och passagerare tjänar, spenderar, tar emot eller löser in poäng utifrån bokningar, efterfrågan, beteende och prenumerationsnivå, med dynamiska incitament, åtkomstförmåner, belöningar och administrativ regelstyrning."
+      },
+      "order": 30
+    }
+  ],
+  "entries": [
+    {
+      "id": "FN-BKG-01-q01",
+      "requirementId": "FN-BKG-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "Which booking channels and OTA partners must be available at L1 launch, and who owns their API access?",
+        "vi": "Kênh đặt xe và đối tác OTA nào bắt buộc ở L1, và ai chịu trách nhiệm cấp quyền API?",
+        "sv": "Vilka bokningskanaler och OTA-partner krävs vid L1-lanseringen, och vem ansvarar för API-åtkomst?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-BKG-01-b01",
+      "requirementId": "FN-BKG-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Define a shared booking model and lifecycle",
+        "vi": "Định nghĩa mô hình và vòng đời đặt xe chung",
+        "sv": "Definiera gemensam bokningsmodell och livscykel"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-BKG-01-b02",
+      "requirementId": "FN-BKG-01",
+      "kind": "breakdown",
+      "parentId": "FN-BKG-01-b01",
+      "title": {
+        "en": "Implement channel adapters and duplicate protection",
+        "vi": "Xây dựng bộ kết nối từng kênh và chống trùng lặp",
+        "sv": "Implementera kanaladaptrar och dubblettskydd"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-BKG-01-b03",
+      "requirementId": "FN-BKG-01",
+      "kind": "breakdown",
+      "parentId": "FN-BKG-01-b01",
+      "title": {
+        "en": "Test creation, cancellation and channel attribution",
+        "vi": "Kiểm thử tạo, huỷ và ghi nhận kênh đặt xe",
+        "sv": "Testa skapande, avbokning och kanalspårning"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-BKG-01-a01",
+      "requirementId": "FN-BKG-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Launch integrations will be agreed individually; partner API access and sandbox availability remain unconfirmed.",
+        "vi": "Từng tích hợp triển khai sẽ được thống nhất riêng; quyền API và môi trường thử nghiệm đối tác chưa được xác nhận.",
+        "sv": "Lanseringsintegrationer avtalas var för sig; API-åtkomst och partnernas testmiljöer är ännu inte bekräftade."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-BKG-02-q01",
+      "requirementId": "FN-BKG-02",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "How are fare rules, minimum fares, rounding, waiting time and surge limits approved?",
+        "vi": "Quy tắc giá, giá tối thiểu, làm tròn, thời gian chờ và giới hạn tăng giá được phê duyệt thế nào?",
+        "sv": "Hur godkänns prisregler, minimipriser, avrundning, väntetid och gränser för pristillägg?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-BKG-02-b01",
+      "requirementId": "FN-BKG-02",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Model versioned fare rules and service zones",
+        "vi": "Mô hình hoá quy tắc giá có phiên bản và vùng dịch vụ",
+        "sv": "Modellera versionshanterade prisregler och servicezoner"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-BKG-02-b02",
+      "requirementId": "FN-BKG-02",
+      "kind": "breakdown",
+      "parentId": "FN-BKG-02-b01",
+      "title": {
+        "en": "Build quote calculation and quote validity",
+        "vi": "Xây dựng tính giá và thời hạn hiệu lực báo giá",
+        "sv": "Bygg prisberäkning och giltighetstid för offerter"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-BKG-02-b03",
+      "requirementId": "FN-BKG-02",
+      "kind": "breakdown",
+      "parentId": "FN-BKG-02-b01",
+      "title": {
+        "en": "Validate fare scenarios and booking price snapshots",
+        "vi": "Xác thực kịch bản giá và lưu giá tại thời điểm đặt",
+        "sv": "Validera prisscenarier och sparade bokningspriser"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-BKG-02-a01",
+      "requirementId": "FN-BKG-02",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Weride will approve fare tables and edge-case policies before implementation estimates are finalized.",
+        "vi": "Weride sẽ duyệt bảng giá và chính sách ngoại lệ trước khi chốt ước lượng triển khai.",
+        "sv": "Weride godkänner pristabeller och undantagsregler innan implementeringsestimat fastställs."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DIS-01-q01",
+      "requirementId": "FN-DIS-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "What are the dispatch ranking rules, offer timeouts, re-offer rules and manual override priorities?",
+        "vi": "Quy tắc xếp hạng, thời hạn nhận chuyến, mời lại và ưu tiên ghi đè thủ công là gì?",
+        "sv": "Vilka regler gäller för rangordning, svarstid, nya erbjudanden och manuell prioritering?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DIS-01-b01",
+      "requirementId": "FN-DIS-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Specify matching rules and zone queues",
+        "vi": "Đặc tả quy tắc ghép chuyến và hàng đợi vùng",
+        "sv": "Specificera matchningsregler och zonköer"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DIS-01-b02",
+      "requirementId": "FN-DIS-01",
+      "kind": "breakdown",
+      "parentId": "FN-DIS-01-b01",
+      "title": {
+        "en": "Implement offers, timeout and reassignment",
+        "vi": "Xây dựng mời chuyến, hết hạn và phân công lại",
+        "sv": "Implementera erbjudanden, tidsgränser och omfördelning"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DIS-01-b03",
+      "requirementId": "FN-DIS-01",
+      "kind": "breakdown",
+      "parentId": "FN-DIS-01-b01",
+      "title": {
+        "en": "Simulate dispatch fairness and failure scenarios",
+        "vi": "Mô phỏng công bằng điều phối và tình huống lỗi",
+        "sv": "Simulera rättvis fördelning och felscenarier"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DIS-01-a01",
+      "requirementId": "FN-DIS-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "A transparent rules-based L1 matcher is proposed; machine-learning optimization is not assumed.",
+        "vi": "Đề xuất bộ ghép chuyến L1 dựa trên quy tắc minh bạch; không mặc định có tối ưu học máy.",
+        "sv": "En transparent regelbaserad L1-matchare föreslås; maskininlärningsoptimering förutsätts inte."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DIS-02-q01",
+      "requirementId": "FN-DIS-02",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "What fleet scale, location refresh interval and historical trip retention should the console support?",
+        "vi": "Bảng điều phối cần hỗ trợ bao nhiêu xe, tần suất cập nhật vị trí và thời gian lưu lịch sử nào?",
+        "sv": "Vilken flottstorlek, uppdateringsfrekvens och lagringstid för reshistorik ska konsolen stödja?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DIS-02-b01",
+      "requirementId": "FN-DIS-02",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Build map, vehicle filters and trip board",
+        "vi": "Xây dựng bản đồ, lọc xe và bảng chuyến",
+        "sv": "Bygg karta, fordonsfilter och resetavla"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DIS-02-b02",
+      "requirementId": "FN-DIS-02",
+      "kind": "breakdown",
+      "parentId": "FN-DIS-02-b01",
+      "title": {
+        "en": "Implement safe manual assignment and overrides",
+        "vi": "Triển khai phân công và ghi đè thủ công an toàn",
+        "sv": "Implementera säker manuell tilldelning och omstyrning"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DIS-02-b03",
+      "requirementId": "FN-DIS-02",
+      "kind": "breakdown",
+      "parentId": "FN-DIS-02-b01",
+      "title": {
+        "en": "Capture arrival, completion and GPS event history",
+        "vi": "Ghi lịch sử đến nơi, hoàn thành và sự kiện GPS",
+        "sv": "Registrera ankomst, slutförande och GPS-historik"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DIS-02-a01",
+      "requirementId": "FN-DIS-02",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "The RFP reference case of 150 vehicles is illustrative, not a confirmed production fleet size.",
+        "vi": "Trường hợp tham chiếu 150 xe trong RFP là minh hoạ, không phải quy mô vận hành đã xác nhận.",
+        "sv": "RFP-exemplet med 150 fordon är illustrativt, inte en bekräftad produktionsflotta."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DRV-01-q01",
+      "requirementId": "FN-DRV-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "Which driver devices, OS versions, onboarding checks and poor-connectivity behaviors are required?",
+        "vi": "Thiết bị, phiên bản hệ điều hành, kiểm tra đăng ký và hành vi khi mạng yếu nào bắt buộc cho tài xế?",
+        "sv": "Vilka enheter, OS-versioner, introduktionskontroller och beteenden vid svag uppkoppling krävs?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DRV-01-b01",
+      "requirementId": "FN-DRV-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Design offer cards and trip state transitions",
+        "vi": "Thiết kế thẻ mời chuyến và chuyển trạng thái",
+        "sv": "Utforma erbjudandekort och tillståndsövergångar"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DRV-01-b02",
+      "requirementId": "FN-DRV-01",
+      "kind": "breakdown",
+      "parentId": "FN-DRV-01-b01",
+      "title": {
+        "en": "Implement driver workflow and earnings views",
+        "vi": "Triển khai quy trình tài xế và màn hình thu nhập",
+        "sv": "Implementera förarflöde och intäktsvyer"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DRV-01-b03",
+      "requirementId": "FN-DRV-01",
+      "kind": "breakdown",
+      "parentId": "FN-DRV-01-b01",
+      "title": {
+        "en": "Test permissions, network recovery and releases",
+        "vi": "Kiểm thử quyền, khôi phục kết nối và phát hành",
+        "sv": "Testa behörigheter, nätverksåterhämtning och releaser"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DRV-01-a01",
+      "requirementId": "FN-DRV-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "App-store accounts, supported devices and operational acceptance criteria must be confirmed by Weride.",
+        "vi": "Weride cần xác nhận tài khoản kho ứng dụng, thiết bị hỗ trợ và tiêu chí nghiệm thu vận hành.",
+        "sv": "Weride behöver bekräfta appbutikskonton, enhetsstöd och operativa acceptanskriterier."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DRV-02-q01",
+      "requirementId": "FN-DRV-02",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "Is external navigation handoff sufficient for L1, or is embedded turn-by-turn navigation mandatory?",
+        "vi": "Chuyển sang ứng dụng điều hướng ngoài có đủ cho L1, hay bắt buộc điều hướng từng chặng tích hợp?",
+        "sv": "Räcker överlämning till extern navigering för L1, eller krävs inbyggd sväng-för-sväng-navigering?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DRV-02-b01",
+      "requirementId": "FN-DRV-02",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Confirm navigation providers and supported platforms",
+        "vi": "Xác nhận nhà cung cấp điều hướng và nền tảng",
+        "sv": "Bekräfta navigeringsleverantörer och plattformar"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DRV-02-b02",
+      "requirementId": "FN-DRV-02",
+      "kind": "breakdown",
+      "parentId": "FN-DRV-02-b01",
+      "title": {
+        "en": "Implement destination deep links and fallback",
+        "vi": "Triển khai liên kết sâu đến điểm đến và dự phòng",
+        "sv": "Implementera djuplänkar till destination och reservflöde"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DRV-02-b03",
+      "requirementId": "FN-DRV-02",
+      "kind": "breakdown",
+      "parentId": "FN-DRV-02-b01",
+      "title": {
+        "en": "Test pickup and drop-off handoff on devices",
+        "vi": "Kiểm thử chuyển điều hướng điểm đón/trả trên thiết bị",
+        "sv": "Testa navigering till hämtning och lämning på enheter"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-DRV-02-a01",
+      "requirementId": "FN-DRV-02",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "External navigation is a proposed implementation option, not an agreed exclusion of embedded navigation.",
+        "vi": "Điều hướng ngoài là phương án đề xuất, không phải loại trừ đã thống nhất đối với điều hướng tích hợp.",
+        "sv": "Extern navigering är ett föreslaget alternativ, inte en överenskommen uteslutning av inbyggd navigering."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-PAS-01-q01",
+      "requirementId": "FN-PAS-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "What passenger registration, cancellation, no-show and scheduled-ride rules apply at launch?",
+        "vi": "Quy tắc đăng ký, huỷ chuyến, khách không đến và đặt trước nào áp dụng khi ra mắt?",
+        "sv": "Vilka regler gäller för registrering, avbokning, utebliven passagerare och förbokade resor vid lansering?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-PAS-01-b01",
+      "requirementId": "FN-PAS-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Design passenger booking and scheduled-ride flows",
+        "vi": "Thiết kế luồng đặt xe và đặt trước cho hành khách",
+        "sv": "Utforma bokningsflöden och förbokade resor"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-PAS-01-b02",
+      "requirementId": "FN-PAS-01",
+      "kind": "breakdown",
+      "parentId": "FN-PAS-01-b01",
+      "title": {
+        "en": "Implement live ETA and driver/vehicle information",
+        "vi": "Triển khai ETA trực tiếp và thông tin tài xế/xe",
+        "sv": "Implementera ETA i realtid och förar-/fordonsuppgifter"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-PAS-01-b03",
+      "requirementId": "FN-PAS-01",
+      "kind": "breakdown",
+      "parentId": "FN-PAS-01-b01",
+      "title": {
+        "en": "Test booking lifecycle and store submissions",
+        "vi": "Kiểm thử vòng đời đặt xe và gửi duyệt ứng dụng",
+        "sv": "Testa bokningslivscykel och appbutiksinlämningar"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-PAS-01-a01",
+      "requirementId": "FN-PAS-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Passenger app delivery remains part of L1 as stated in the RFP; adoption assumptions require discovery.",
+        "vi": "Ứng dụng hành khách vẫn thuộc L1 theo RFP; giả định về mức sử dụng cần discovery.",
+        "sv": "Passagerarappen ingår i L1 enligt RFP:n; antaganden om användning kräver vidare analys."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-PAS-02-q01",
+      "requirementId": "FN-PAS-02",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "Which payment provider, merchant-of-record model, Swish agreement and refund flows are approved?",
+        "vi": "Nhà cung cấp thanh toán, mô hình bên thu tiền, hợp đồng Swish và quy trình hoàn tiền nào được duyệt?",
+        "sv": "Vilken betalningsleverantör, betalningsansvarig part, Swish-överenskommelse och återbetalningsflöden är godkända?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-PAS-02-b01",
+      "requirementId": "FN-PAS-02",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Confirm merchant onboarding and payment contracts",
+        "vi": "Xác nhận đăng ký đơn vị bán hàng và hợp đồng thanh toán",
+        "sv": "Bekräfta handlarregistrering och betalningsavtal"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-PAS-02-b02",
+      "requirementId": "FN-PAS-02",
+      "kind": "breakdown",
+      "parentId": "FN-PAS-02-b01",
+      "title": {
+        "en": "Implement card tokens, Swish and verified webhooks",
+        "vi": "Triển khai token thẻ, Swish và webhook đã xác thực",
+        "sv": "Implementera korttoken, Swish och verifierade webhooks"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-PAS-02-b03",
+      "requirementId": "FN-PAS-02",
+      "kind": "breakdown",
+      "parentId": "FN-PAS-02-b01",
+      "title": {
+        "en": "Test reconciliation, refunds and duplicate events",
+        "vi": "Kiểm thử đối soát, hoàn tiền và sự kiện trùng",
+        "sv": "Testa avstämning, återbetalning och dubbletthändelser"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-PAS-02-a01",
+      "requirementId": "FN-PAS-02",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Payment accounts, Swish certificates and transaction fees are external dependencies to be confirmed.",
+        "vi": "Tài khoản thanh toán, chứng thư Swish và phí giao dịch là phụ thuộc bên ngoài cần xác nhận.",
+        "sv": "Betalningskonton, Swish-certifikat och transaktionsavgifter är externa beroenden som måste bekräftas."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-COM-01-q01",
+      "requirementId": "FN-COM-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "Who may read conversation history, how long is it retained, and which telephony provider supports Swedish numbers?",
+        "vi": "Ai được đọc lịch sử trò chuyện, lưu bao lâu và nhà cung cấp thoại nào hỗ trợ số Thụy Điển?",
+        "sv": "Vem får läsa konversationshistorik, hur länge sparas den och vilken telefonileverantör stöder svenska nummer?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-COM-01-b01",
+      "requirementId": "FN-COM-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Model trip-scoped conversations and permissions",
+        "vi": "Mô hình hoá hội thoại theo chuyến và quyền truy cập",
+        "sv": "Modellera resebundna konversationer och behörigheter"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-COM-01-b02",
+      "requirementId": "FN-COM-01",
+      "kind": "breakdown",
+      "parentId": "FN-COM-01-b01",
+      "title": {
+        "en": "Implement messaging and masked-call integration",
+        "vi": "Triển khai nhắn tin và tích hợp gọi ẩn số",
+        "sv": "Implementera meddelanden och maskerade samtal"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-COM-01-b03",
+      "requirementId": "FN-COM-01",
+      "kind": "breakdown",
+      "parentId": "FN-COM-01-b01",
+      "title": {
+        "en": "Test retention, access control and support retrieval",
+        "vi": "Kiểm thử lưu trữ, phân quyền và tra cứu hỗ trợ",
+        "sv": "Testa lagring, åtkomstkontroll och supportåtkomst"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-COM-01-a01",
+      "requirementId": "FN-COM-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Communication history ownership and retention are unconfirmed and must be explicitly agreed.",
+        "vi": "Quyền sở hữu và thời gian lưu lịch sử liên lạc chưa được xác nhận, cần thống nhất rõ.",
+        "sv": "Ägande och lagringstid för kommunikationshistorik är obekräftade och måste avtalas uttryckligen."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-HTL-01-q01",
+      "requirementId": "FN-HTL-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "How should room charging, hotel credit limits, corporate billing and staff access work?",
+        "vi": "Tính phí vào phòng, hạn mức khách sạn, thanh toán doanh nghiệp và quyền nhân viên cần vận hành thế nào?",
+        "sv": "Hur ska rumsdebitering, hotellkreditgränser, företagsfakturering och personalåtkomst fungera?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-HTL-01-b01",
+      "requirementId": "FN-HTL-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Define hotel tenancy and receptionist permissions",
+        "vi": "Định nghĩa phân tách khách sạn và quyền lễ tân",
+        "sv": "Definiera hotellisolering och receptionsbehörigheter"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-HTL-01-b02",
+      "requirementId": "FN-HTL-01",
+      "kind": "breakdown",
+      "parentId": "FN-HTL-01-b01",
+      "title": {
+        "en": "Build guest booking and ETA management",
+        "vi": "Xây dựng đặt xe cho khách và quản lý ETA",
+        "sv": "Bygg gästbokning och ETA-hantering"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-HTL-01-b03",
+      "requirementId": "FN-HTL-01",
+      "kind": "breakdown",
+      "parentId": "FN-HTL-01-b01",
+      "title": {
+        "en": "Validate room/account charging and reporting",
+        "vi": "Xác thực tính phí phòng/tài khoản và báo cáo",
+        "sv": "Validera rums-/kontodebitering och rapportering"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-HTL-01-a01",
+      "requirementId": "FN-HTL-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "PMS integration is not explicitly specified in the matrix and must not be assumed included or excluded.",
+        "vi": "Tích hợp PMS không được mô tả rõ trong matrix; không mặc định bao gồm hay loại trừ.",
+        "sv": "PMS-integration specificeras inte uttryckligen i matrisen och får inte antas ingå eller vara utesluten."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-SUP-01-q01",
+      "requirementId": "FN-SUP-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "What carrier hierarchy, document approval process and payout calculation model are required?",
+        "vi": "Cần cấu trúc đối tác, quy trình duyệt hồ sơ và mô hình tính chi trả nào?",
+        "sv": "Vilken åkerihierarki, dokumentgranskning och modell för utbetalningsberäkning krävs?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-SUP-01-b01",
+      "requirementId": "FN-SUP-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Model carrier organizations and fleet permissions",
+        "vi": "Mô hình hoá tổ chức đối tác và quyền đội xe",
+        "sv": "Modellera åkeriorganisationer och flottbehörigheter"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-SUP-01-b02",
+      "requirementId": "FN-SUP-01",
+      "kind": "breakdown",
+      "parentId": "FN-SUP-01-b01",
+      "title": {
+        "en": "Build driver/vehicle document management",
+        "vi": "Xây dựng quản lý hồ sơ tài xế/xe",
+        "sv": "Bygg dokumenthantering för förare och fordon"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-SUP-01-b03",
+      "requirementId": "FN-SUP-01",
+      "kind": "breakdown",
+      "parentId": "FN-SUP-01-b01",
+      "title": {
+        "en": "Implement payout statements and reconciliation views",
+        "vi": "Triển khai sao kê chi trả và màn hình đối soát",
+        "sv": "Implementera utbetalningsbesked och avstämningsvyer"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-SUP-01-a01",
+      "requirementId": "FN-SUP-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Carrier payout frequency, approval roles and banking integration boundaries remain to be confirmed.",
+        "vi": "Tần suất chi trả, vai trò phê duyệt và phạm vi tích hợp ngân hàng cần được xác nhận.",
+        "sv": "Utbetalningsfrekvens, godkännanderoller och gränser för bankintegration återstår att bekräfta."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-VOU-01-q01",
+      "requirementId": "FN-VOU-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "What voucher eligibility, stacking, redemption limits, expiry and refund rules are needed?",
+        "vi": "Cần quy tắc điều kiện, cộng dồn, giới hạn sử dụng, hết hạn và hoàn tiền voucher nào?",
+        "sv": "Vilka regler krävs för behörighet, kombination, inlösengränser, giltighet och återbetalning?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-VOU-01-b01",
+      "requirementId": "FN-VOU-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Define campaign rules and eligibility conditions",
+        "vi": "Định nghĩa quy tắc chiến dịch và điều kiện áp dụng",
+        "sv": "Definiera kampanjregler och behörighetsvillkor"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-VOU-01-b02",
+      "requirementId": "FN-VOU-01",
+      "kind": "breakdown",
+      "parentId": "FN-VOU-01-b01",
+      "title": {
+        "en": "Build voucher issuance and checkout redemption",
+        "vi": "Xây dựng phát hành voucher và áp dụng khi thanh toán",
+        "sv": "Bygg kupongutfärdande och inlösen i kassan"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-VOU-01-b03",
+      "requirementId": "FN-VOU-01",
+      "kind": "breakdown",
+      "parentId": "FN-VOU-01-b01",
+      "title": {
+        "en": "Test usage limits and concurrent redemptions",
+        "vi": "Kiểm thử giới hạn và sử dụng đồng thời",
+        "sv": "Testa användningsgränser och samtidig inlösen"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-VOU-01-a01",
+      "requirementId": "FN-VOU-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Promotions in L1 are distinct from the L2 points/subscription economy; final rules need approval.",
+        "vi": "Khuyến mãi L1 tách biệt hệ điểm/gói đăng ký L2; quy tắc cuối cần được duyệt.",
+        "sv": "L1-kampanjer är separata från L2:s poäng-/prenumerationsekonomi; slutregler måste godkännas."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-INT-01-q01",
+      "requirementId": "FN-INT-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "Which Weride tenant, user groups, role mappings and conditional-access policies will be used?",
+        "vi": "Sẽ dùng tenant Weride, nhóm người dùng, ánh xạ vai trò và chính sách truy cập có điều kiện nào?",
+        "sv": "Vilken Weride-klientorganisation, användargrupper, rollmappning och villkorsstyrd åtkomst ska användas?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-INT-01-b01",
+      "requirementId": "FN-INT-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Confirm tenant registration and role mapping",
+        "vi": "Xác nhận đăng ký tenant và ánh xạ vai trò",
+        "sv": "Bekräfta klientregistrering och rollmappning"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-INT-01-b02",
+      "requirementId": "FN-INT-01",
+      "kind": "breakdown",
+      "parentId": "FN-INT-01-b01",
+      "title": {
+        "en": "Implement SSO and server-side authorization",
+        "vi": "Triển khai SSO và phân quyền phía máy chủ",
+        "sv": "Implementera SSO och serverbaserad behörighetskontroll"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-INT-01-b03",
+      "requirementId": "FN-INT-01",
+      "kind": "breakdown",
+      "parentId": "FN-INT-01-b01",
+      "title": {
+        "en": "Test revoked access, sessions and role boundaries",
+        "vi": "Kiểm thử thu hồi quyền, phiên và giới hạn vai trò",
+        "sv": "Testa återkallad åtkomst, sessioner och rollgränser"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "FN-INT-01-a01",
+      "requirementId": "FN-INT-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "The Madison-only login of this discovery workspace is separate from the Weride production SSO requirement.",
+        "vi": "Đăng nhập riêng Madison của workspace discovery này tách biệt yêu cầu SSO sản phẩm Weride.",
+        "sv": "Madison-inloggningen i denna discovery-arbetsyta är separat från Werides SSO-krav i produktion."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-01-q01",
+      "requirementId": "REG-PWD-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "Who will approve the disclosure wording, language coverage and change-notification policy?",
+        "vi": "Ai phê duyệt nội dung công bố, phạm vi ngôn ngữ và chính sách thông báo thay đổi?",
+        "sv": "Vem godkänner upplysningarnas formulering, språkstöd och policy för ändringsmeddelanden?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-01-b01",
+      "requirementId": "REG-PWD-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Inventory algorithm inputs and driver impacts",
+        "vi": "Lập danh mục đầu vào thuật toán và tác động tài xế",
+        "sv": "Inventera algoritmindata och påverkan på förare"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-01-b02",
+      "requirementId": "REG-PWD-01",
+      "kind": "breakdown",
+      "parentId": "REG-PWD-01-b01",
+      "title": {
+        "en": "Build versioned driver-facing disclosure screens",
+        "vi": "Xây dựng màn hình công bố có phiên bản cho tài xế",
+        "sv": "Bygg versionshanterade upplysningsvyer för förare"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-01-b03",
+      "requirementId": "REG-PWD-01",
+      "kind": "breakdown",
+      "parentId": "REG-PWD-01-b01",
+      "title": {
+        "en": "Review disclosure coverage with legal stakeholders",
+        "vi": "Rà soát phạm vi công bố cùng bên pháp lý",
+        "sv": "Granska upplysningarnas täckning med juridiska intressenter"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-01-a01",
+      "requirementId": "REG-PWD-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Legal wording and applicability require Weride legal review; the RFP is recorded here, not independently certified.",
+        "vi": "Nội dung và phạm vi pháp lý cần Weride rà soát; workspace ghi nhận RFP, không chứng nhận pháp lý độc lập.",
+        "sv": "Juridisk formulering och tillämplighet kräver Werides granskning; RFP:n återges här utan oberoende certifiering."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-02-q01",
+      "requirementId": "REG-PWD-02",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "Which actions require approval, who may approve them, and how are decisions and evidence retained?",
+        "vi": "Hành động nào cần phê duyệt, ai được duyệt và quyết định/bằng chứng được lưu thế nào?",
+        "sv": "Vilka åtgärder kräver godkännande, vem får godkänna och hur sparas beslut och underlag?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-02-b01",
+      "requirementId": "REG-PWD-02",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Model protected actions and approval roles",
+        "vi": "Mô hình hoá hành động được bảo vệ và vai trò duyệt",
+        "sv": "Modellera skyddade åtgärder och godkännanderoller"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-02-b02",
+      "requirementId": "REG-PWD-02",
+      "kind": "breakdown",
+      "parentId": "REG-PWD-02-b01",
+      "title": {
+        "en": "Build review queue and approval enforcement",
+        "vi": "Xây dựng hàng đợi rà soát và bắt buộc phê duyệt",
+        "sv": "Bygg granskningskö och tvingande godkännande"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-02-b03",
+      "requirementId": "REG-PWD-02",
+      "kind": "breakdown",
+      "parentId": "REG-PWD-02-b01",
+      "title": {
+        "en": "Test bypass resistance and decision traceability",
+        "vi": "Kiểm thử chống bỏ qua phê duyệt và truy vết quyết định",
+        "sv": "Testa skydd mot kringgående och spårbarhet"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-02-a01",
+      "requirementId": "REG-PWD-02",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "No automated adverse driver action is assumed acceptable without the human review specified by the RFP.",
+        "vi": "Không giả định cho phép tự động xử lý bất lợi với tài xế khi thiếu rà soát con người theo RFP.",
+        "sv": "Ingen automatisk negativ föraråtgärd antas vara tillåten utan den mänskliga granskning som RFP:n anger."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-03-q01",
+      "requirementId": "REG-PWD-03",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "What review deadlines, escalation rules and response templates have legal and operations approved?",
+        "vi": "Pháp lý và vận hành đã duyệt thời hạn rà soát, quy tắc chuyển cấp và mẫu phản hồi nào?",
+        "sv": "Vilka granskningstider, eskaleringsregler och svarsmallar har juridik och drift godkänt?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-03-b01",
+      "requirementId": "REG-PWD-03",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Define appeal lifecycle and configurable deadlines",
+        "vi": "Định nghĩa vòng đời khiếu nại và thời hạn cấu hình",
+        "sv": "Definiera ärendelivscykel och konfigurerbara tidsfrister"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-03-b02",
+      "requirementId": "REG-PWD-03",
+      "kind": "breakdown",
+      "parentId": "REG-PWD-03-b01",
+      "title": {
+        "en": "Implement explanation requests and escalation queue",
+        "vi": "Triển khai yêu cầu giải thích và hàng đợi chuyển cấp",
+        "sv": "Implementera förklaringsbegäran och eskaleringskö"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-03-b03",
+      "requirementId": "REG-PWD-03",
+      "kind": "breakdown",
+      "parentId": "REG-PWD-03-b01",
+      "title": {
+        "en": "Test deadline tracking and response evidence",
+        "vi": "Kiểm thử theo dõi thời hạn và bằng chứng phản hồi",
+        "sv": "Testa tidsuppföljning och svarsunderlag"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-03-a01",
+      "requirementId": "REG-PWD-03",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "No statutory duration is hard-coded until the applicable rules and business calendar are confirmed.",
+        "vi": "Không cố định thời lượng pháp định trong code trước khi xác nhận quy định áp dụng và lịch làm việc.",
+        "sv": "Ingen lagstadgad tidslängd hårdkodas innan regler och verksamhetskalender har bekräftats."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-04-q01",
+      "requirementId": "REG-PWD-04",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "How is offline availability distinguished from network loss, and what telemetry is prohibited in each state?",
+        "vi": "Phân biệt trạng thái ngừng nhận chuyến với mất mạng thế nào, và cấm thu thập dữ liệu nào ở mỗi trạng thái?",
+        "sv": "Hur skiljs offline-tillgänglighet från nätverksbortfall, och vilken telemetri är förbjuden i respektive tillstånd?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-04-b01",
+      "requirementId": "REG-PWD-04",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Define availability and telemetry state machine",
+        "vi": "Định nghĩa máy trạng thái sẵn sàng và thu thập dữ liệu",
+        "sv": "Definiera tillståndsmaskin för tillgänglighet och telemetri"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-04-b02",
+      "requirementId": "REG-PWD-04",
+      "kind": "breakdown",
+      "parentId": "REG-PWD-04-b01",
+      "title": {
+        "en": "Enforce stop on device and reject prohibited ingest",
+        "vi": "Dừng trên thiết bị và từ chối dữ liệu thu thập bị cấm",
+        "sv": "Stoppa på enheten och avvisa förbjuden inläsning"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-04-b03",
+      "requirementId": "REG-PWD-04",
+      "kind": "breakdown",
+      "parentId": "REG-PWD-04-b01",
+      "title": {
+        "en": "Verify background behavior on iOS and Android",
+        "vi": "Xác minh hành vi chạy nền trên iOS và Android",
+        "sv": "Verifiera bakgrundsbeteende på iOS och Android"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-04-a01",
+      "requirementId": "REG-PWD-04",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Offline-state semantics require explicit approval; network loss must not be silently treated as equivalent.",
+        "vi": "Ngữ nghĩa trạng thái ngoại tuyến cần phê duyệt rõ; không tự coi mất mạng là trạng thái tương đương.",
+        "sv": "Betydelsen av offline-tillstånd måste godkännas uttryckligen; nätverksbortfall får inte likställas utan beslut."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-05-q01",
+      "requirementId": "REG-PWD-05",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "Which reporting format, periodicity, classification rules and submission mechanism are required?",
+        "vi": "Cần định dạng báo cáo, chu kỳ, quy tắc phân loại và cơ chế nộp nào?",
+        "sv": "Vilket rapportformat, intervall, klassificeringsregler och inlämningssätt krävs?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-05-b01",
+      "requirementId": "REG-PWD-05",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Confirm report fields and classification ownership",
+        "vi": "Xác nhận trường báo cáo và trách nhiệm phân loại",
+        "sv": "Bekräfta rapportfält och klassificeringsansvar"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-05-b02",
+      "requirementId": "REG-PWD-05",
+      "kind": "breakdown",
+      "parentId": "REG-PWD-05-b01",
+      "title": {
+        "en": "Implement aggregation and export generation",
+        "vi": "Triển khai tổng hợp và tạo tệp xuất",
+        "sv": "Implementera aggregering och exportgenerering"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-05-b03",
+      "requirementId": "REG-PWD-05",
+      "kind": "breakdown",
+      "parentId": "REG-PWD-05-b01",
+      "title": {
+        "en": "Validate sample exports with responsible reviewers",
+        "vi": "Xác thực tệp mẫu cùng người rà soát phụ trách",
+        "sv": "Validera exempelrapporter med ansvariga granskare"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-PWD-05-a01",
+      "requirementId": "REG-PWD-05",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "The final authority format and submission channel must be supplied or confirmed during discovery.",
+        "vi": "Định dạng cuối và kênh nộp cơ quan chức năng cần được cung cấp hoặc xác nhận trong discovery.",
+        "sv": "Myndighetens slutformat och inlämningskanal ska tillhandahållas eller bekräftas under discovery."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-DAC-01-q01",
+      "requirementId": "REG-DAC-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "Who is the reportable seller, how are identities validated, and what retention/access policies apply?",
+        "vi": "Đối tượng bán hàng phải báo cáo là ai, định danh được xác thực thế nào và áp dụng chính sách lưu trữ/truy cập nào?",
+        "sv": "Vem är rapporteringspliktig säljare, hur valideras identiteten och vilka lagrings-/åtkomstregler gäller?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-DAC-01-b01",
+      "requirementId": "REG-DAC-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Map identity fields and validation requirements",
+        "vi": "Ánh xạ trường định danh và yêu cầu xác thực",
+        "sv": "Kartlägg identitetsfält och valideringskrav"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-DAC-01-b02",
+      "requirementId": "REG-DAC-01",
+      "kind": "breakdown",
+      "parentId": "REG-DAC-01-b01",
+      "title": {
+        "en": "Implement protected storage and restricted access",
+        "vi": "Triển khai lưu trữ bảo vệ và giới hạn truy cập",
+        "sv": "Implementera skyddad lagring och begränsad åtkomst"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-DAC-01-b03",
+      "requirementId": "REG-DAC-01",
+      "kind": "breakdown",
+      "parentId": "REG-DAC-01-b01",
+      "title": {
+        "en": "Test data validation, masking and audit access",
+        "vi": "Kiểm thử dữ liệu, che thông tin và nhật ký truy cập",
+        "sv": "Testa validering, maskering och åtkomstloggning"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-DAC-01-a01",
+      "requirementId": "REG-DAC-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Seller classification and retention policy are pending tax/legal confirmation; no real identity data belongs in this workspace.",
+        "vi": "Phân loại đối tượng và chính sách lưu trữ chờ xác nhận thuế/pháp lý; không đưa dữ liệu định danh thật vào workspace này.",
+        "sv": "Säljarklassificering och lagringstid inväntar skatte-/juridikbekräftelse; verkliga identitetsuppgifter hör inte hemma i denna arbetsyta."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-DAC-02-q01",
+      "requirementId": "REG-DAC-02",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "How are corrections, refunds, commissions and payout timing reflected in quarterly consideration?",
+        "vi": "Điều chỉnh, hoàn tiền, hoa hồng và thời điểm chi trả được phản ánh vào khoản thu theo quý thế nào?",
+        "sv": "Hur påverkar korrigeringar, återbetalningar, provisioner och utbetalningstidpunkt kvartalsersättningen?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-DAC-02-b01",
+      "requirementId": "REG-DAC-02",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Specify ledger events and accounting boundaries",
+        "vi": "Đặc tả sự kiện sổ và ranh giới kế toán",
+        "sv": "Specificera huvudbokshändelser och redovisningsgränser"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-DAC-02-b02",
+      "requirementId": "REG-DAC-02",
+      "kind": "breakdown",
+      "parentId": "REG-DAC-02-b01",
+      "title": {
+        "en": "Implement quarterly aggregation and corrections",
+        "vi": "Triển khai tổng hợp theo quý và điều chỉnh",
+        "sv": "Implementera kvartalsaggregering och korrigeringar"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-DAC-02-b03",
+      "requirementId": "REG-DAC-02",
+      "kind": "breakdown",
+      "parentId": "REG-DAC-02-b01",
+      "title": {
+        "en": "Reconcile trip totals, fees and payout statements",
+        "vi": "Đối soát tổng chuyến, phí và sao kê chi trả",
+        "sv": "Stäm av resor, avgifter och utbetalningsbesked"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-DAC-02-a01",
+      "requirementId": "REG-DAC-02",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Accounting recognition and correction rules require approval before ledger design is finalized.",
+        "vi": "Quy tắc ghi nhận và điều chỉnh kế toán cần được duyệt trước khi chốt thiết kế sổ.",
+        "sv": "Regler för redovisning och korrigering ska godkännas innan huvudboksdesignen fastställs."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-DAC-03-q01",
+      "requirementId": "REG-DAC-03",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "Which schema version, correction-report flow and validation/submission process will be accepted?",
+        "vi": "Phiên bản schema, luồng báo cáo điều chỉnh và quy trình kiểm tra/nộp nào được chấp nhận?",
+        "sv": "Vilken schemaversion, korrigeringsrapportering och validerings-/inlämningsprocess godtas?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-DAC-03-b01",
+      "requirementId": "REG-DAC-03",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Obtain approved schemas and sample datasets",
+        "vi": "Lấy schema được duyệt và dữ liệu mẫu",
+        "sv": "Hämta godkända scheman och exempeldata"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-DAC-03-b02",
+      "requirementId": "REG-DAC-03",
+      "kind": "breakdown",
+      "parentId": "REG-DAC-03-b01",
+      "title": {
+        "en": "Build annual XML export and schema validation",
+        "vi": "Xây dựng xuất XML hàng năm và kiểm tra schema",
+        "sv": "Bygg årlig XML-export och schemavalidering"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-DAC-03-b03",
+      "requirementId": "REG-DAC-03",
+      "kind": "breakdown",
+      "parentId": "REG-DAC-03-b01",
+      "title": {
+        "en": "Test corrections, missing fields and tax-year boundaries",
+        "vi": "Kiểm thử điều chỉnh, thiếu trường và ranh giới năm thuế",
+        "sv": "Testa korrigeringar, saknade fält och skatteårsgränser"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-DAC-03-a01",
+      "requirementId": "REG-DAC-03",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "XML export does not automatically imply direct electronic filing; submission responsibility is unresolved.",
+        "vi": "Xuất XML không mặc định bao gồm nộp điện tử trực tiếp; trách nhiệm nộp chưa được chốt.",
+        "sv": "XML-export innebär inte automatiskt direkt elektronisk inlämning; inlämningsansvaret är inte fastställt."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-SWE-01-q01",
+      "requirementId": "REG-SWE-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "What certified equipment, reporting-center obligations and audit retention apply to Weride’s operating model?",
+        "vi": "Mô hình Weride áp dụng nghĩa vụ thiết bị chứng nhận, trung tâm báo cáo và lưu kiểm toán nào?",
+        "sv": "Vilka krav på certifierad utrustning, redovisningscentral och logglagring gäller för Werides driftsmodell?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-SWE-01-b01",
+      "requirementId": "REG-SWE-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Validate operating model and audit event specification",
+        "vi": "Xác thực mô hình vận hành và đặc tả sự kiện kiểm toán",
+        "sv": "Validera driftsmodell och specifikation för logghändelser"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-SWE-01-b02",
+      "requirementId": "REG-SWE-01",
+      "kind": "breakdown",
+      "parentId": "REG-SWE-01-b01",
+      "title": {
+        "en": "Design integrity-protected pricing and route evidence",
+        "vi": "Thiết kế bằng chứng giá/lộ trình bảo vệ tính toàn vẹn",
+        "sv": "Utforma integritetsskyddade pris- och ruttunderlag"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-SWE-01-b03",
+      "requirementId": "REG-SWE-01",
+      "kind": "breakdown",
+      "parentId": "REG-SWE-01-b01",
+      "title": {
+        "en": "Test traceability, retention and export verification",
+        "vi": "Kiểm thử truy vết, lưu trữ và xác minh xuất dữ liệu",
+        "sv": "Testa spårbarhet, lagring och exportverifiering"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-SWE-01-a01",
+      "requirementId": "REG-SWE-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "The RFP audit-log statement is not treated as proof that software alone satisfies transport certification obligations.",
+        "vi": "Nội dung nhật ký trong RFP không được coi là bằng chứng phần mềm riêng lẻ đáp ứng nghĩa vụ chứng nhận vận tải.",
+        "sv": "RFP:ns loggkrav betraktas inte som bevis för att enbart mjukvara uppfyller transportcertifieringskraven."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-SWE-02-q01",
+      "requirementId": "REG-SWE-02",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "Are courier services in L1, and how should mixed services, rounding, refunds and invoices be handled?",
+        "vi": "Giao hàng có thuộc L1 không; xử lý dịch vụ hỗn hợp, làm tròn, hoàn tiền và hoá đơn thế nào?",
+        "sv": "Ingår budtjänster i L1, och hur ska blandade tjänster, avrundning, återbetalningar och fakturor hanteras?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-SWE-02-b01",
+      "requirementId": "REG-SWE-02",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Define service tax categories and effective dates",
+        "vi": "Định nghĩa nhóm thuế dịch vụ và ngày hiệu lực",
+        "sv": "Definiera momskategorier och giltighetsdatum"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-SWE-02-b02",
+      "requirementId": "REG-SWE-02",
+      "kind": "breakdown",
+      "parentId": "REG-SWE-02-b01",
+      "title": {
+        "en": "Implement configurable tax calculation and allocation",
+        "vi": "Triển khai tính và phân bổ thuế có cấu hình",
+        "sv": "Implementera konfigurerbar momsberäkning och fördelning"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-SWE-02-b03",
+      "requirementId": "REG-SWE-02",
+      "kind": "breakdown",
+      "parentId": "REG-SWE-02-b01",
+      "title": {
+        "en": "Validate invoice, refund and rounding scenarios",
+        "vi": "Xác thực kịch bản hoá đơn, hoàn tiền và làm tròn",
+        "sv": "Validera faktura-, återbetalnings- och avrundningsfall"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-SWE-02-a01",
+      "requirementId": "REG-SWE-02",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "The 6% and 25% rates are reproduced from the RFP, not independently verified tax advice.",
+        "vi": "Mức 6% và 25% được ghi lại từ RFP, không phải tư vấn thuế đã xác minh độc lập.",
+        "sv": "Satserna 6 % och 25 % återges från RFP:n och utgör inte oberoende verifierad skatterådgivning."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-SWE-03-q01",
+      "requirementId": "REG-SWE-03",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "What does “Fortnox/Stripe accounting software” mean operationally, and what cadence does “bi-weekly” denote?",
+        "vi": "“Phần mềm kế toán Fortnox/Stripe” có nghĩa vận hành cụ thể gì và “bi-weekly” là chu kỳ nào?",
+        "sv": "Vad avses operativt med ”Fortnox/Stripe accounting software”, och vilken frekvens avses med ”bi-weekly”?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-SWE-03-b01",
+      "requirementId": "REG-SWE-03",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Map charts of accounts, payouts and export cadence",
+        "vi": "Ánh xạ hệ tài khoản, chi trả và chu kỳ xuất",
+        "sv": "Kartlägg kontoplan, utbetalningar och exportintervall"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-SWE-03-b02",
+      "requirementId": "REG-SWE-03",
+      "kind": "breakdown",
+      "parentId": "REG-SWE-03-b01",
+      "title": {
+        "en": "Implement export adapters with retry and deduplication",
+        "vi": "Triển khai bộ xuất có thử lại và chống trùng",
+        "sv": "Implementera exportadaptrar med återförsök och dubblettskydd"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-SWE-03-b03",
+      "requirementId": "REG-SWE-03",
+      "kind": "breakdown",
+      "parentId": "REG-SWE-03-b01",
+      "title": {
+        "en": "Reconcile export totals and accounting acknowledgments",
+        "vi": "Đối soát tổng xuất và xác nhận kế toán",
+        "sv": "Stäm av exportsummor och bokföringsbekräftelser"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "REG-SWE-03-a01",
+      "requirementId": "REG-SWE-03",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Provider responsibilities and the meaning of “bi-weekly” require clarification rather than silent interpretation.",
+        "vi": "Trách nhiệm nhà cung cấp và nghĩa “bi-weekly” cần làm rõ, không tự diễn giải.",
+        "sv": "Leverantörsansvar och betydelsen av ”bi-weekly” behöver klargöras och ska inte tolkas tyst."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "high",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-AI-01-q01",
+      "requirementId": "EXP-AI-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "What historical data, event feeds and measurable forecast success criteria are available?",
+        "vi": "Có dữ liệu lịch sử, nguồn sự kiện và tiêu chí đo chất lượng dự báo nào?",
+        "sv": "Vilka historiska data, evenemangskällor och mätbara kvalitetskriterier finns?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-AI-01-b01",
+      "requirementId": "EXP-AI-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Audit historical demand data and event sources",
+        "vi": "Đánh giá dữ liệu nhu cầu lịch sử và nguồn sự kiện",
+        "sv": "Granska historiska efterfrågedata och evenemangskällor"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-AI-01-b02",
+      "requirementId": "EXP-AI-01",
+      "kind": "breakdown",
+      "parentId": "EXP-AI-01-b01",
+      "title": {
+        "en": "Prototype baseline forecast and heatmap overlay",
+        "vi": "Thử nghiệm dự báo cơ sở và lớp bản đồ nhiệt",
+        "sv": "Prototypa basprognos och värmekartslager"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-AI-01-b03",
+      "requirementId": "EXP-AI-01",
+      "kind": "breakdown",
+      "parentId": "EXP-AI-01-b01",
+      "title": {
+        "en": "Evaluate forecast quality and operational usefulness",
+        "vi": "Đánh giá chất lượng dự báo và giá trị vận hành",
+        "sv": "Utvärdera prognoskvalitet och operativ nytta"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-AI-01-a01",
+      "requirementId": "EXP-AI-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "L2 forecasting depends on data quality and agreed evaluation; no accuracy or savings claim is assumed.",
+        "vi": "Dự báo L2 phụ thuộc chất lượng dữ liệu và đánh giá thống nhất; không mặc định cam kết độ chính xác hay tiết kiệm.",
+        "sv": "L2-prognoser beror på datakvalitet och avtalad utvärdering; ingen noggrannhet eller besparing förutsätts."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-FLT-01-q01",
+      "requirementId": "EXP-FLT-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "Which provider, airports, delay rules and cancelled/diverted-flight workflows are required?",
+        "vi": "Cần nhà cung cấp, sân bay, quy tắc trễ và luồng xử lý chuyến huỷ/chuyển hướng nào?",
+        "sv": "Vilken leverantör, flygplatser, förseningsregler och flöden för inställda/omdirigerade flyg krävs?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-FLT-01-b01",
+      "requirementId": "EXP-FLT-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Confirm flight provider and matching identifiers",
+        "vi": "Xác nhận nhà cung cấp và mã ghép chuyến bay",
+        "sv": "Bekräfta flygleverantör och matchningsidentifierare"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-FLT-01-b02",
+      "requirementId": "EXP-FLT-01",
+      "kind": "breakdown",
+      "parentId": "EXP-FLT-01-b01",
+      "title": {
+        "en": "Implement delay sync and pickup rescheduling",
+        "vi": "Triển khai đồng bộ trễ và đổi lịch đón",
+        "sv": "Implementera förseningssynk och omplanerad hämtning"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-FLT-01-b03",
+      "requirementId": "EXP-FLT-01",
+      "kind": "breakdown",
+      "parentId": "EXP-FLT-01-b01",
+      "title": {
+        "en": "Test cancellations, diversions and dispatcher alerts",
+        "vi": "Kiểm thử huỷ, đổi hướng và cảnh báo điều phối",
+        "sv": "Testa inställda flyg, omdirigeringar och trafikledningslarm"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-FLT-01-a01",
+      "requirementId": "EXP-FLT-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Flight tracking remains L2 in the matrix despite its mention in the ecosystem overview.",
+        "vi": "Theo dõi chuyến bay vẫn là L2 trong matrix dù được nhắc ở tổng quan hệ sinh thái.",
+        "sv": "Flygspårning är L2 i matrisen trots att den nämns i ekosystemöversikten."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-M365-01-q01",
+      "requirementId": "EXP-M365-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "How are eligible appointments identified, consent obtained and updates/cancellations synchronized?",
+        "vi": "Xác định lịch hẹn phù hợp, lấy đồng ý và đồng bộ thay đổi/huỷ thế nào?",
+        "sv": "Hur identifieras relevanta möten, inhämtas samtycke och synkroniseras ändringar/avbokningar?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-M365-01-b01",
+      "requirementId": "EXP-M365-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Define calendar permissions and booking eligibility",
+        "vi": "Định nghĩa quyền lịch và điều kiện tạo chuyến",
+        "sv": "Definiera kalenderbehörigheter och bokningsvillkor"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-M365-01-b02",
+      "requirementId": "EXP-M365-01",
+      "kind": "breakdown",
+      "parentId": "EXP-M365-01-b01",
+      "title": {
+        "en": "Implement Graph subscriptions and booking sync",
+        "vi": "Triển khai đăng ký Graph và đồng bộ chuyến",
+        "sv": "Implementera Graph-prenumerationer och bokningssynk"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-M365-01-b03",
+      "requirementId": "EXP-M365-01",
+      "kind": "breakdown",
+      "parentId": "EXP-M365-01-b01",
+      "title": {
+        "en": "Test recurrence, time zones and cancellation races",
+        "vi": "Kiểm thử lịch lặp, múi giờ và xung đột huỷ",
+        "sv": "Testa återkommande möten, tidszoner och avbokningskonflikter"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-M365-01-a01",
+      "requirementId": "EXP-M365-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Calendar access is not included in baseline SSO consent and requires separate approved permissions.",
+        "vi": "Quyền truy cập lịch không nằm trong đồng ý SSO cơ bản và cần được duyệt riêng.",
+        "sv": "Kalenderåtkomst ingår inte i grundläggande SSO-samtycke utan kräver separata godkända behörigheter."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-M365-02-q01",
+      "requirementId": "EXP-M365-02",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "What dashboard freshness, emergency acknowledgment and fallback channels are required?",
+        "vi": "Cần độ mới dashboard, xác nhận cảnh báo khẩn và kênh dự phòng nào?",
+        "sv": "Vilken aktualitet, larmkvittering och vilka reservkanaler krävs?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-M365-02-b01",
+      "requirementId": "EXP-M365-02",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Define BI metrics and emergency escalation ownership",
+        "vi": "Định nghĩa chỉ số BI và trách nhiệm xử lý khẩn",
+        "sv": "Definiera BI-mått och ansvar för larmeskalering"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-M365-02-b02",
+      "requirementId": "EXP-M365-02",
+      "kind": "breakdown",
+      "parentId": "EXP-M365-02-b01",
+      "title": {
+        "en": "Build operational data and Teams alert adapters",
+        "vi": "Xây dựng bộ kết nối dữ liệu vận hành và cảnh báo Teams",
+        "sv": "Bygg adaptrar för driftsdata och Teams-larm"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-M365-02-b03",
+      "requirementId": "EXP-M365-02",
+      "kind": "breakdown",
+      "parentId": "EXP-M365-02-b01",
+      "title": {
+        "en": "Test delivery, acknowledgment and fallback handling",
+        "vi": "Kiểm thử gửi, xác nhận và xử lý dự phòng",
+        "sv": "Testa leverans, kvittering och reservhantering"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-M365-02-a01",
+      "requirementId": "EXP-M365-02",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Teams delivery alone is not assumed to be a complete emergency-response service or SLA.",
+        "vi": "Chỉ gửi đến Teams không được mặc định là dịch vụ ứng cứu khẩn hay SLA hoàn chỉnh.",
+        "sv": "Leverans till Teams ensam förutsätts inte utgöra en fullständig larmtjänst eller SLA."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-PAS-01-q01",
+      "requirementId": "EXP-PAS-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "Who is liable if invited passengers decline or fail payment, and how are refunds split?",
+        "vi": "Ai chịu trách nhiệm nếu người được mời từ chối/thanh toán thất bại, và chia hoàn tiền thế nào?",
+        "sv": "Vem ansvarar om inbjudna passagerare avböjer eller inte betalar, och hur delas återbetalningar?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-PAS-01-b01",
+      "requirementId": "EXP-PAS-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Define split invitations and liability rules",
+        "vi": "Định nghĩa lời mời chia cước và trách nhiệm thanh toán",
+        "sv": "Definiera delningsinbjudningar och betalningsansvar"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-PAS-01-b02",
+      "requirementId": "EXP-PAS-01",
+      "kind": "breakdown",
+      "parentId": "EXP-PAS-01-b01",
+      "title": {
+        "en": "Implement split-payment orchestration and status",
+        "vi": "Triển khai điều phối thanh toán chia phần và trạng thái",
+        "sv": "Implementera delbetalningsorkestrering och status"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-PAS-01-b03",
+      "requirementId": "EXP-PAS-01",
+      "kind": "breakdown",
+      "parentId": "EXP-PAS-01-b01",
+      "title": {
+        "en": "Test partial failure, cancellations and refunds",
+        "vi": "Kiểm thử thất bại một phần, huỷ và hoàn tiền",
+        "sv": "Testa partiella fel, avbokningar och återbetalningar"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-PAS-01-a01",
+      "requirementId": "EXP-PAS-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Fare splitting is separately scoped L2 work and depends on the selected payment provider’s capabilities.",
+        "vi": "Chia cước là phạm vi L2 riêng và phụ thuộc khả năng nhà cung cấp thanh toán được chọn.",
+        "sv": "Kostnadsdelning är separat L2-arbete och beror på den valda betalningsleverantörens kapacitet."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-DRV-01-q01",
+      "requirementId": "EXP-DRV-01",
+      "kind": "qa",
+      "parentId": "",
+      "title": {
+        "en": "The matrix lists EXP-DRV-01, but §5.4 lists EXP-TAX-01 instead. Which L2 items must be priced?",
+        "vi": "Matrix có EXP-DRV-01 nhưng mục 5.4 lại có EXP-TAX-01. Cần báo giá những mục L2 nào?",
+        "sv": "Matrisen listar EXP-DRV-01 men avsnitt 5.4 listar i stället EXP-TAX-01. Vilka L2-delar ska prissättas?"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "open",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-DRV-01-b01",
+      "requirementId": "EXP-DRV-01",
+      "kind": "breakdown",
+      "parentId": "",
+      "title": {
+        "en": "Clarify economy scope and commercial-table mismatch",
+        "vi": "Làm rõ phạm vi hệ điểm và khác biệt bảng thương mại",
+        "sv": "Klargör ekonomins omfattning och avvikelsen i pristabellen"
+      },
+      "body": {
+        "en": "Proposed discovery work package. Scope and acceptance criteria need team review.",
+        "vi": "Gói công việc discovery đề xuất. Phạm vi và tiêu chí nghiệm thu cần nhóm rà soát.",
+        "sv": "Föreslaget discovery-arbetspaket. Omfattning och acceptanskriterier behöver granskas av teamet."
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-DRV-01-b02",
+      "requirementId": "EXP-DRV-01",
+      "kind": "breakdown",
+      "parentId": "EXP-DRV-01-b01",
+      "title": {
+        "en": "Design points ledger, subscription tiers and rules",
+        "vi": "Thiết kế sổ điểm, hạng đăng ký và quy tắc",
+        "sv": "Utforma poängbok, prenumerationsnivåer och regler"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-DRV-01-b03",
+      "requirementId": "EXP-DRV-01",
+      "kind": "breakdown",
+      "parentId": "EXP-DRV-01-b01",
+      "title": {
+        "en": "Validate redemption, reversals and abuse prevention",
+        "vi": "Xác thực đổi điểm, hoàn tác và chống lạm dụng",
+        "sv": "Validera inlösen, återföring och missbruksskydd"
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "todo",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    },
+    {
+      "id": "EXP-DRV-01-a01",
+      "requirementId": "EXP-DRV-01",
+      "kind": "assumption",
+      "parentId": "",
+      "title": {
+        "en": "Points have no assumed cash value or transferability; business, tax and legal treatment remain unresolved.",
+        "vi": "Không mặc định điểm có giá trị tiền mặt hay chuyển nhượng; cách xử lý kinh doanh, thuế, pháp lý chưa chốt.",
+        "sv": "Poäng antas inte ha kontantvärde eller överförbarhet; affärs-, skatte- och juridisk hantering är ännu inte fastställd."
+      },
+      "body": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "answer": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "acceptance": {
+        "en": "",
+        "vi": "",
+        "sv": ""
+      },
+      "status": "unvalidated",
+      "priority": "medium",
+      "owner": "",
+      "estimateHours": null,
+      "version": 1,
+      "origin": "proposal",
+      "createdBy": "seed",
+      "updatedBy": "seed",
+      "createdByName": "Madison · working draft",
+      "updatedByName": "Madison · working draft"
+    }
+  ]
+}

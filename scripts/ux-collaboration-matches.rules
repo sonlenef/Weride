@@ -1,0 +1,26 @@
+      match /replies/{id} {
+        allow read: if member();
+        allow create: if member() && validReply(request.resource.data,id) && request.resource.data.version == 1 && request.resource.data.createdBy == request.auth.uid && request.resource.data.createdAt == request.time;
+        allow update: if member() && resource.data.createdBy == request.auth.uid && !acceptedReply(id,resource.data.questionId) && validReply(request.resource.data,id)
+          && request.resource.data.version == resource.data.version + 1 && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['body','originalLocale','version','updatedBy','updatedByName','updatedAt']);
+        allow delete: if member() && resource.data.createdBy == request.auth.uid && !acceptedReply(id,resource.data.questionId);
+      }
+      match /resolutions/{id} {
+        allow read: if member();
+        allow create: if member() && validResolution(request.resource.data,id) && request.resource.data.version == 1;
+        allow update: if member() && validResolution(request.resource.data,id) && request.resource.data.version == resource.data.version + 1;
+        allow delete: if false;
+      }
+      match /decisions/{id} {
+        allow read: if member();
+        allow create: if member() && validDecision(request.resource.data,id) && request.resource.data.createdBy == request.auth.uid && request.resource.data.createdAt == request.time && request.resource.data.version == 1;
+        allow update: if member() && resource.data.createdBy == request.auth.uid && validDecision(request.resource.data,id) && request.resource.data.version == resource.data.version + 1
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['title','body','originalLocale','state','source','ownerUid','requirementIds','version','updatedBy','updatedByName','updatedAt','confirmedBy','confirmedAt']);
+        allow delete: if false;
+      }
+      match /trash/{id} {
+        allow read: if member();
+        allow create: if member() && validTrash(request.resource.data,id);
+        allow update: if member() && restoredTrash(request.resource.data,resource.data);
+        allow delete: if false;
+      }

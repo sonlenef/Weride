@@ -1,0 +1,8 @@
+2026-09-29T06:18:30.884Z
+PASS: Hosting HTTP 200, security headers, English default, explicit locked Microsoft gate
+PASS: English / Swedish / Vietnamese production UI, locale retained after reload
+PASS: Deep link works; preview query does not bypass authentication or expose private requirements
+PASS: No PDF/private seed/development JSON endpoint served by Hosting
+PASS: No browser runtime errors; mobile layout fits viewport
+PASS: Live Firestore rejects anonymous project, collection, requirement reads and attempted write (HTTP 403)
+PASS: Final release root/deep-link HTML revalidates (no-cache); fingerprinted JS is immutable.

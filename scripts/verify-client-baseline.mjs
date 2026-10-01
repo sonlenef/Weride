@@ -1,0 +1,16 @@
+import {maintenanceApi,listDocuments,WORKSPACE,BASE} from './maintenance-firestore.mjs';
+import {readFile,writeFile} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const api=await maintenanceApi();
+const file='.backups/data/2026-09-29T16-42-44-202Z-before-uiux-upgrade/workspace.raw.json';
+const before=JSON.parse(await readFile(file,'utf8'));
+const original=before.documents.filter(d=>d.name.startsWith(WORKSPACE+'/requirements/'));
+const current=await listDocuments(api,WORKSPACE+'/requirements');
+assert.equal(original.length,30);assert.equal(current.length,30);
+assert(original.every(d=>current.some(n=>n.name===d.name&&n.updateTime===d.updateTime)));
+const entries=await listDocuments(api,WORKSPACE+'/entries');
+const retired=entries.filter(d=>d.fields?.kind?.stringValue==='qa'&&d.fields?.createdBy?.stringValue==='seed');
+assert.equal(retired.length,0);
+const publications=await listDocuments(api,BASE+'/clientQuestionnaires');
+const report={at:new Date().toISOString(),unchangedOriginalRequirements:30,retiredDraftQuestionsRemaining:retired.length,clientPublications:publications.length,scope:'Read-only verification. No production questionnaire or response was created for testing.'};
+await writeFile('docs/CLIENT-QUESTIONNAIRES-DATA-VERIFICATION.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));

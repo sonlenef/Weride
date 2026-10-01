@@ -1,0 +1,22 @@
+import {describe,it,expect} from 'vitest';
+import {isGeneralQuestion,validEntryScope,selectQuestions,activityTarget} from '../src/lib/question-hub';
+import {entryError} from '../src/lib/helpers';
+import {canManageEntry} from '../src/lib/questions';
+import {newEntry} from '../src/lib/types';
+import type {Entry,Requirement} from '../src/lib/types';
+const reqs=[{id:'FN-BKG-01'}] as Requirement[];
+const make=(id:string,patch:Partial<Entry>={}):Entry=>({...newEntry('FN-BKG-01','qa'),id,title:{en:id,vi:'',sv:''},createdBy:'alice',createdByName:'Alice',version:1,createdAt:'2026-09-29T10:00:00Z',...patch});
+const rows=[make('general',{requirementId:'',priority:'critical'}),make('linked',{priority:'low',createdAt:'2026-09-29T11:00:00Z'}),make('other',{createdBy:'bob',createdByName:'Bob',priority:'high',status:'answered',answer:{en:'Recorded answer',vi:'',sv:''}}),make('b',{kind:'breakdown'})];
+const filters={search:'',scope:'',priority:'',status:'',author:'',sort:'latest'};
+describe('Central question list',()=>{
+  it('supports a general question without a requirement',()=>{expect(isGeneralQuestion(rows[0])).toBe(true);expect(validEntryScope(rows[0],reqs)).toBe(true);});
+  it('keeps the requirement mandatory for other entry types',()=>{expect(validEntryScope(make('x',{requirementId:'',kind:'assumption'}),reqs)).toBe(false);expect(validEntryScope(make('x',{requirementId:'UNKNOWN'}),reqs)).toBe(false);});
+  it('includes only Q&A without duplicates',()=>expect(selectQuestions(rows,[],'alice',filters)).toHaveLength(3));
+  it('filters general, linked and specific requirements',()=>{expect(selectQuestions(rows,[],'alice',{...filters,scope:'general'}).map(q=>q.id)).toEqual(['general']);expect(selectQuestions(rows,[],'alice',{...filters,scope:'linked'})).toHaveLength(2);expect(selectQuestions(rows,[],'alice',{...filters,scope:'FN-BKG-01'})).toHaveLength(2);});
+  it('combines priority, asker and status filters',()=>{expect(selectQuestions(rows,[],'alice',{...filters,author:'mine',priority:'critical',status:'open',search:'Alice'}).map(q=>q.id)).toEqual(['general']);});
+  it('searches answer text',()=>expect(selectQuestions(rows,[],'alice',{...filters,search:'Recorded answer'}).map(q=>q.id)).toEqual(['other']));
+  it('sorts by priority and recency',()=>{expect(selectQuestions(rows,[],'alice',{...filters,sort:'priority'}).map(q=>q.id)).toEqual(['general','other','linked']);expect(selectQuestions(rows,[],'alice',filters)[0].id).toBe('linked');});
+  it('links activity to the central question',()=>expect(activityTarget({kind:'qa',entryId:'general',requirementId:''})).toBe('/questions?question=general'));
+  it('retains author-only management',()=>{for(const row of rows.slice(0,3)){expect(canManageEntry(row,row.createdBy)).toBe(true);expect(canManageEntry(row,'someone')).toBe(false);}});
+  it('validates the four priority values',()=>{expect(entryError(make('title',{priority:'invalid' as Entry['priority']}))).toBe('invalidPriority');for(const priority of ['low','medium','high','critical'] as const)expect(entryError(make('title',{priority}))).toBeNull();});
+});

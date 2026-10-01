@@ -1,0 +1,35 @@
+
+> weride-discovery-workspace@1.0.0 test:review-integration
+> firebase emulators:exec --only firestore --project demo-weride 'npm --prefix functions run test:integration'
+
+i  emulators: Starting emulators: firestore
+i  emulators: Detected demo project ID "demo-weride", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail.
+i  firestore: Firestore Emulator logging to firestore-debug.log
+✔  firestore: Firestore Emulator UI websocket is running on 9150.
+i  Running script: npm --prefix functions run test:integration
+
+> test:integration
+> npm run build && node --test tests/repository.integration.mjs
+
+
+> build
+> tsc
+
+✔ transactional capture includes source and context without writing baseline (914.877417ms)
+✔ create is idempotent and private owner metadata is scoped by UID (74.825542ms)
+✔ revoke denies other owners and physically removes the shared snapshot (56.480291ms)
+✔ same request ID cannot replace a previously captured snapshot (40.018834ms)
+✔ daily creation cap is enforced transactionally (34.835959ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4088.567375
+✔  Script exited successfully (code 0)
+i  emulators: Shutting down emulators.
+i  firestore: Stopping Firestore Emulator
+i  hub: Stopping emulator hub
+i  logging: Stopping Logging Emulator
