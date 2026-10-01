@@ -9,6 +9,7 @@ const Matrix=lazy(()=>import('./pages/Matrix'));
 const Requirement=lazy(()=>import('./pages/Requirement'));
 const Questions=lazy(()=>import('./pages/Questions'));
 const System=lazy(()=>import('./pages/System'));
+const ActorMap=lazy(()=>import('./pages/ActorMap'));
 const Sources=lazy(()=>import('./pages/Sources'));
 const Activity=lazy(()=>import('./pages/Activity'));
 const ReviewPacks=lazy(()=>import('./pages/ReviewPacks'));
@@ -19,7 +20,7 @@ export default function AuthenticatedApp(){
   return <WorkspaceProvider><BrowserRouter><Routes><Route element={<Shell/>}>
     <Route index element={view(<Overview/>)}/><Route path="requirements" element={view(<Matrix/>)}/>
     <Route path="requirements/:id" element={view(<Requirement/>)}/><Route path="questions" element={view(<Questions/>)}/>
-    <Route path="system" element={view(<System/>)}/><Route path="sources" element={view(<Sources/>)}/>
+    <Route path="system" element={view(<System/>)}/><Route path="actors" element={view(<ActorMap/>)}/><Route path="sources" element={view(<Sources/>)}/>
     <Route path="activity" element={view(<Activity/>)}/><Route path="review-packs" element={view(<ReviewPacks/>)}/>
     <Route path="client-questions" element={view(<ClientQuestions/>)}/><Route path="search" element={view(<Search/>)}/><Route path="*" element={<Navigate to="/" replace/>}/>
   </Route></Routes></BrowserRouter></WorkspaceProvider>;

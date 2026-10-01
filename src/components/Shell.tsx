@@ -1,7 +1,7 @@
 import {useEffect,useLayoutEffect,useRef,useState} from 'react';
 import {Link,NavLink,Outlet,useLocation,useNavigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
-import {MessageSquareText,Sparkles,Activity,ArrowUpRight,BookOpen,ChevronRight,CircleHelp,LayoutDashboard,ListChecks,LogOut,Menu,Network,Search,ShieldCheck,X} from 'lucide-react';
+import {MessageSquareText,Sparkles,Activity,ArrowUpRight,BookOpen,ChevronRight,CircleHelp,LayoutDashboard,ListChecks,LogOut,Menu,Network,Search,ShieldCheck,UsersRound,X} from 'lucide-react';
 import {Brand,LocaleSwitch,Spinner} from './ui';
 import {useAuth} from '../lib/auth';
 import {useWorkspace} from '../lib/store';
@@ -25,7 +25,7 @@ export default function Shell(){
     const handle=(e:KeyboardEvent)=>{if(e.key==='Escape'){e.preventDefault();setMobile(false);}if(e.key==='Tab'){const items=controls(),first=items[0],last=items.at(-1);if(!node.contains(document.activeElement)||e.shiftKey&&document.activeElement===first||!e.shiftKey&&document.activeElement===last){e.preventDefault();(e.shiftKey?last:first)?.focus();}}};
     document.addEventListener('keydown',handle);return()=>{document.body.style.overflow=overflow;document.removeEventListener('keydown',handle);menuButton.current?.focus({preventScroll:true});};
   },[small,mobile]);
-  const nav=[{to:'/',label:'overview',icon:LayoutDashboard},{to:'/requirements',label:'matrix',icon:ListChecks},{to:'/questions',label:'qhMenu',icon:MessageSquareText},{to:'/client-questions',label:'cqMenu',icon:MessageSquareText},{to:'/review-packs',label:'aiPacks',icon:Sparkles},{to:'/system',label:'system',icon:Network},{to:'/activity',label:'activity',icon:Activity},{to:'/sources',label:'sourceNotes',icon:BookOpen}];
+  const nav=[{to:'/',label:'overview',icon:LayoutDashboard},{to:'/requirements',label:'matrix',icon:ListChecks},{to:'/questions',label:'qhMenu',icon:MessageSquareText},{to:'/client-questions',label:'cqMenu',icon:MessageSquareText},{to:'/review-packs',label:'aiPacks',icon:Sparkles},{to:'/system',label:'system',icon:Network},{to:'/actors',label:'actorMap',icon:UsersRound},{to:'/activity',label:'activity',icon:Activity},{to:'/sources',label:'sourceNotes',icon:BookOpen}];
   const section=location.pathname==='/search'?'uxSearchResults':nav.find(n=>n.to==='/'?location.pathname==='/':location.pathname.startsWith(n.to))?.label||'workspace';
   const minutes=sessionUntil?Math.max(0,Math.ceil((sessionUntil-clock)/60000)):null;
   return <div className="app-shell">
