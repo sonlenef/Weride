@@ -1,12 +1,13 @@
 import {syncState} from './sync-state';
 import { collaborationActions } from './collaboration-actions';
+import { productActions } from './product-actions';
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { QueryDocumentSnapshot } from 'firebase/firestore';
 import { collection, doc, onSnapshot, query, orderBy, limit, runTransaction, serverTimestamp, getDocs, startAfter } from 'firebase/firestore';
 import { useAuth } from './auth';
 import { db } from './database';
-import type { Entry, Review, Workspace, Activity, Assignment, TeamMember, Reply, Decision, TrashItem } from './types';
+import type { Entry, Review, Workspace, Activity, Assignment, TeamMember, Reply, Decision, TrashItem, ProductItem } from './types';
 import { blankText } from './types';
 import { registerCurrentMember } from './member-directory';
 import { eligiblePic, memberLabel, assignmentTitle } from './assignment';
@@ -17,6 +18,7 @@ interface Store {
   syncStatus:string;lastSyncedAt:string;hasOlderActivities:boolean;loadOlderActivities:()=>Promise<void>;
   saveReply:(r:Reply)=>Promise<void>;deleteReply:(r:Reply)=>Promise<void>;
   acceptReply:(questionId:string,replyId:string,version:number)=>Promise<void>;
+  saveProductItem:(item:ProductItem)=>Promise<ProductItem>;deleteProductItem:(item:ProductItem)=>Promise<void>;importProductBaseline:()=>Promise<void>;
   saveDecision:(d:Decision)=>Promise<void>;restoreTrash:(t:TrashItem)=>Promise<void>;restorePrevious:(e:Activity)=>Promise<void>;
 data:Workspace|null;loading:boolean;error:string;online:boolean;retry:()=>void;saveEntry:(entry:Entry)=>Promise<void>;deleteEntry:(entry:Entry)=>Promise<void>;saveReview:(review:Review)=>Promise<void>; saveAssignment:(id:string,uid:string,version:number)=>Promise<void>; directoryError:string;}
 const Context=createContext<Store|null>(null);
@@ -41,7 +43,7 @@ export function WorkspaceProvider({children}:{children:ReactNode}) {
   useEffect(()=>{
     if(!member)return;let alive=true;setLoading(true);setError('');setDirectoryError('');setData(null);setServerReady(false);setWriteFault('');activityCursor.current=null;older.current=[];
     if(import.meta.env.DEV&&preview){
-      (async()=>{try{const response=await fetch('/__dev/seed');if(!response.ok)throw new Error('fixture');const seed=await response.json();let loaded={...seed,reviews:[],activities:[],assignments:[],replies:[],resolutions:[],decisions:[],trash:[],members:seed.members||[]} as Workspace;try{const cached=JSON.parse(localStorage.getItem(cacheKey)||'null');if(cached?.schemaVersion===1&&Array.isArray(cached.entries)&&cached.project?.id==='weride')loaded={...cached,reviewContext:seed.reviewContext||null,members:seed.members||[],assignments:cached.assignments||[]};}catch{/* Start clean if storage is corrupt. */}if(alive){setData(loaded);setLoading(false);}}catch{if(alive){setError('loadError');setLoading(false);}}})();
+      (async()=>{try{const response=await fetch('/__dev/seed');if(!response.ok)throw new Error('fixture');const seed=await response.json();let loaded={...seed,reviews:[],activities:[],assignments:[],replies:[],resolutions:[],decisions:[],trash:[],productItems:[],members:seed.members||[]} as Workspace;try{const cached=JSON.parse(localStorage.getItem(cacheKey)||'null');if(cached?.schemaVersion===1&&Array.isArray(cached.entries)&&cached.project?.id==='weride')loaded={...cached,reviewContext:seed.reviewContext||null,members:seed.members||[],assignments:cached.assignments||[]};}catch{/* Start clean if storage is corrupt. */}if(alive){setData(loaded);setLoading(false);}}catch{if(alive){setError('loadError');setLoading(false);}}})();
       return()=>{alive=false;};
     }
     if(!db){setError('loadError');setLoading(false);return;}
@@ -51,9 +53,9 @@ export function WorkspaceProvider({children}:{children:ReactNode}) {
     const update=(key:string,value:unknown,meta:{fromCache:boolean;hasPendingWrites:boolean})=>{
       if(!alive)return;Object.assign(loaded,{[key]:value});ready.add(key);metadata.set(key,meta);
       setMetadataPending([...metadata.values()].some(m=>m.hasPendingWrites));
-      setServerReady(metadata.size===12&&[...metadata.values()].every(m=>!m.fromCache));
+      setServerReady(metadata.size===13&&[...metadata.values()].every(m=>!m.fromCache));
       if(!meta.fromCache)setLastSyncedAt(new Date().toISOString());
-      if(ready.size===12){
+      if(ready.size===13){
         const activities=[...new Map([...(loaded.activities||[]),...older.current].map(e=>[e.id,e])).values()].sort((a,b)=>b.at.localeCompare(a.at));
         const next={...loaded,activities} as Workspace;ref.current=next;setData(next);setLoading(false);
       }
@@ -62,7 +64,7 @@ export function WorkspaceProvider({children}:{children:ReactNode}) {
     const stops=[
       onSnapshot(doc(db,base),{includeMetadataChanges:true},snap=>{if(!snap.exists()){fail();return;}update('project',decode(snap.data()),snap.metadata);},fail),
       onSnapshot(doc(db,base,'context','ai-review'),{includeMetadataChanges:true},snap=>update('reviewContext',snap.exists()?decode(snap.data()):null,snap.metadata),fail),
-      ...['members','assignments','requirements','entries','reviews','replies','resolutions','decisions','trash'].map(key=>
+      ...['members','assignments','requirements','entries','reviews','replies','resolutions','decisions','trash','productItems'].map(key=>
         onSnapshot(collection(db!,base,key),{includeMetadataChanges:true},snap=>{
           const items=snap.docs.map(d=>decode(d.data()));
           if(key==='requirements')(items as Workspace['requirements']).sort((a,b)=>a.order-b.order);
@@ -136,6 +138,8 @@ export function WorkspaceProvider({children}:{children:ReactNode}) {
   };
   const tracked=async(work:()=>Promise<void>)=>{setPending(n=>n+1);setWriteFault('');try{await work();}catch(e){setWriteFault('uxWriteError');throw e;}finally{setPending(n=>Math.max(0,n-1));}};
   const extra=collaborationActions({member,preview,online,get:()=>ref.current,commit:localCommit});
+  const product=productActions({member,preview,online,get:()=>ref.current,commit:localCommit});
+  const trackedValue=async<T,>(work:()=>Promise<T>)=>{let out!:T;await tracked(async()=>{out=await work();});return out;};
   const restorePrevious=async(event:Activity)=>{
     if(!event.before||!event.after||!['update','review'].includes(event.action))throw Error('uxRestoreUnavailable');
     const before=event.before as Entry,after=event.after as Entry;
@@ -149,6 +153,6 @@ export function WorkspaceProvider({children}:{children:ReactNode}) {
     await saveEntry({...current,title:before.title,body:before.body,answer:before.answer,acceptance:before.acceptance,status:before.status,priority:before.priority,owner:before.owner,estimateHours:before.estimateHours});
   };
   return <Context.Provider value={{data,loading,error,online,retry:()=>setReload(n=>n+1),saveEntry:e=>tracked(()=>saveEntry(e)),deleteEntry:e=>tracked(()=>deleteEntry(e)),saveReview:r=>tracked(()=>saveReview(r)),saveAssignment:(id,uid,v)=>tracked(()=>saveAssignment(id,uid,v)),directoryError,
-    syncStatus,lastSyncedAt,hasOlderActivities,loadOlderActivities,saveReply:r=>tracked(()=>extra.saveReply(r)),deleteReply:r=>tracked(()=>extra.deleteReply(r)),acceptReply:(q,r,v)=>tracked(()=>extra.acceptReply(q,r,v)),saveDecision:d=>tracked(()=>extra.saveDecision(d)),restoreTrash:t=>tracked(()=>extra.restoreTrash(t)),restorePrevious:e=>tracked(()=>restorePrevious(e))}}>{children}</Context.Provider>;
+    syncStatus,lastSyncedAt,hasOlderActivities,loadOlderActivities,saveReply:r=>tracked(()=>extra.saveReply(r)),deleteReply:r=>tracked(()=>extra.deleteReply(r)),acceptReply:(q,r,v)=>tracked(()=>extra.acceptReply(q,r,v)),saveDecision:d=>tracked(()=>extra.saveDecision(d)),saveProductItem:i=>trackedValue(()=>product.saveProductItem(i)),deleteProductItem:i=>tracked(()=>product.deleteProductItem(i)),importProductBaseline:()=>tracked(()=>product.importProductBaseline()),restoreTrash:t=>tracked(()=>extra.restoreTrash(t)),restorePrevious:e=>tracked(()=>restorePrevious(e))}}>{children}</Context.Provider>;
 }
 export function useWorkspace(){const value=useContext(Context);if(!value)throw new Error('WorkspaceProvider missing');return value;}

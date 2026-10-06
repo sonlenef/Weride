@@ -15,7 +15,7 @@ Constraints: content in EN/VI/SV, no horizontal page scroll, keyboard parity for
 
 THESIS: A three-tier org chart: actors, then modules, then submodules. Every module is drawn exactly once. Relations appear only when asked for, as live edges on hover or pin. This refuses both the duplicated per-actor columns and the static spaghetti of arrows.
 
-OWN-WORLD: The incumbent workspace: deep green #1f3a2e root, white nodes on #f3f7f2, action green #235f47 for lit state, 1px #bfcec4 rules. Four group dots (green, blue, amber, violet) are the only extra hues. The signature details are six actor pips on every module node (filled = uses, dashed ring = indirect, empty = no) and SVG edges that draw themselves in 200ms.
+OWN-WORLD: The incumbent workspace: deep green #1f3a2e root, white nodes on the #f6f8f7 page ground (src/styles.css :root), action green #235f47 for lit state, 1px #bfcec4 rules. Four group dots (green, blue, amber, violet) are the only extra hues. The signature details are six actor pips on every module node (filled = uses, dashed ring = indirect, empty = no) and SVG edges that draw themselves in 200ms.
 
 STORY: Visitors scan six actors and fourteen modules in one viewport. Hovering an actor lights its modules and dims the rest. Hovering a module lights its actors and previews its submodules underneath. A click pins the selection and the URL keeps it for sharing.
 

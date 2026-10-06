@@ -30,7 +30,12 @@ export interface QuestionResolution { id:string; replyId:string; replyVersion:nu
 export interface Decision { id:string; title:Localized; body:Localized; originalLocale:Locale; state:'proposed'|'confirmed'|'superseded'; source:string; ownerUid:string; requirementIds:string[]; version:number; createdBy:string; createdByName:string; updatedBy:string; updatedByName:string; createdAt?:string; updatedAt?:string; confirmedBy:string; confirmedAt?:string|null; }
 export interface TrashItem { id:string; entryId:string; snapshot:Entry; deletedBy:string; deletedByName:string; deletedAt:string; restoredBy:string; restoredAt:string|null; version:number; }
 
-export interface Workspace { replies?:Reply[]; resolutions?:QuestionResolution[]; decisions?:Decision[]; trash?:TrashItem[]; schemaVersion: number; project: Project; requirements: Requirement[]; entries: Entry[]; reviews: Review[]; activities: Activity[]; reviewContext?: ReviewContext | null; members?:TeamMember[]; assignments?:Assignment[]; }
+export type ProductStatus = 'confirmed' | 'derived' | 'clarify';
+export type ProductGroup = '' | 'access' | 'core' | 'ops' | 'control';
+/** Product tree node (handover actors/modules/submodules). Module→actor links live on the module (`actors`, `indirect`). */
+export interface ProductItem { id:string; kind:'actor'|'module'|'sub'; parentId:string; name:Localized; description:Localized; originalLocale:Locale; status:ProductStatus; group:ProductGroup; channel:Localized; actors:string[]; indirect:string[]; order:number; version:number; createdBy:string; createdByName:string; updatedBy:string; updatedByName:string; createdAt?:string; updatedAt?:string; }
+
+export interface Workspace { productItems?:ProductItem[]; replies?:Reply[]; resolutions?:QuestionResolution[]; decisions?:Decision[]; trash?:TrashItem[]; schemaVersion: number; project: Project; requirements: Requirement[]; entries: Entry[]; reviews: Review[]; activities: Activity[]; reviewContext?: ReviewContext | null; members?:TeamMember[]; assignments?:Assignment[]; }
 export const locales: Locale[] = ['en', 'vi', 'sv'];
 export const blankText = (): Localized => ({en: '', vi: '', sv: ''});
 export const states: Record<Kind, string[]> = { qa: ['open', 'answered', 'resolved'], breakdown: ['todo', 'progress', 'done'], assumption: ['unvalidated', 'confirmed', 'rejected'] };

@@ -111,9 +111,9 @@ service cloud.firestore {
         && d.keys().hasOnly(['id','action','requirementId','entryId','kind','title','actor','actorName','at','before','after'])
         && d.id == id && d.action in ['create','update','delete','review','assign','unassign','restore','resolve']
         && d.requirementId is string
-        && (d.requirementId == '' ? d.kind in ['qa','reply','resolution','decision'] : reqExists(d.requirementId))
+        && (d.requirementId == '' ? d.kind in ['qa','reply','resolution','decision','product'] : reqExists(d.requirementId))
         && d.entryId is string && d.entryId.size() <= 128
-        && d.kind in ['qa','breakdown','assumption','review','assignment','reply','resolution','decision'] && localized(d.title,2000)
+        && d.kind in ['qa','breakdown','assumption','review','assignment','reply','resolution','decision','product'] && localized(d.title,2000)
         && d.actor == request.auth.uid && d.actorName is string && d.actorName.size() <= 200
         && d.at == request.time && (d.before == null || d.before is map) && (d.after == null || d.after is map)
         && (d.kind == 'assignment' ? validAssignmentAudit(d) : d.action in ['create','update','delete','review','restore','resolve']);
@@ -179,7 +179,29 @@ service cloud.firestore {
         && d.updatedBy == request.auth.uid && d.updatedByName is string && d.updatedByName.size() <= 200 && d.updatedAt == request.time;
     }
 
+    // Product tree (actors/modules/submodules): any member may edit; the author is stamped on every write.
+    function validProductItem(d,id) {
+      return d.keys().hasAll(['id','kind','parentId','name','description','originalLocale','status','group','channel','actors','indirect','order','version','createdBy','createdByName','createdAt','updatedBy','updatedByName','updatedAt'])
+        && d.keys().hasOnly(['id','kind','parentId','name','description','originalLocale','status','group','channel','actors','indirect','order','version','createdBy','createdByName','createdAt','updatedBy','updatedByName','updatedAt'])
+        && d.id == id && id.size() <= 128 && d.kind in ['actor','module','sub']
+        && d.parentId is string && d.parentId.size() <= 128 && (d.kind == 'sub') == (d.parentId != '')
+        && d.originalLocale in ['en','vi','sv'] && localized(d.name,300) && d.name.en.size() > 0 && localized(d.description,4000) && localized(d.channel,300)
+        && d.status in ['confirmed','derived','clarify']
+        && d.group in ['','access','core','ops','control'] && (d.kind == 'module') == (d.group != '')
+        && d.actors is list && d.actors.size() <= 50 && d.indirect is list && d.indirect.size() <= 50
+        && d.order is int && d.order >= 0
+        && d.version is int && d.version > 0 && d.createdBy is string && d.createdByName is string && d.createdByName.size() <= 200 && d.createdAt is timestamp
+        && d.updatedBy == request.auth.uid && d.updatedByName is string && d.updatedByName.size() <= 200 && d.updatedAt == request.time;
+    }
+
     match /workspaces/weride {
+      match /productItems/{id} {
+        allow read: if member();
+        allow create: if member() && validProductItem(request.resource.data,id) && request.resource.data.createdBy == request.auth.uid && request.resource.data.createdAt == request.time && request.resource.data.version == 1;
+        allow update: if member() && validProductItem(request.resource.data,id) && request.resource.data.version == resource.data.version + 1
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['name','description','originalLocale','status','group','channel','actors','indirect','order','version','updatedBy','updatedByName','updatedAt']);
+        allow delete: if member();
+      }
       match /replies/{id} {
         allow read: if member();
         allow create: if member() && validReply(request.resource.data,id) && request.resource.data.version == 1 && request.resource.data.createdBy == request.auth.uid && request.resource.data.createdAt == request.time;
