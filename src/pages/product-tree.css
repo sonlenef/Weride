@@ -1,0 +1,111 @@
+.pt-page{--pt-line:#c4d2c8;--pt-lit:var(--action);--pt-tint:#eef6f0;--pt-unsure:#b98a2e;--pt-dim:.34;--pt-ease:cubic-bezier(.16,1,.3,1)}
+.pt-page ::selection{background:#cfe3d4;color:var(--text-primary)}
+.pt-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;margin:0 0 14px}
+.pt-note{display:inline-flex;align-items:center;gap:8px;margin:0;padding:7px 12px;border:1px dashed var(--pt-unsure);border-radius:8px;background:#fffaf0;color:#664d12;font-size:13px;line-height:1.45}
+.pt-note>svg{flex:none}
+body .pt-search{width:320px;max-width:100%;background:var(--surface)}
+.pt-search input::-webkit-search-cancel-button{display:none}
+.pt-search button{display:grid;place-items:center;width:24px;height:24px;border:0;border-radius:6px;background:none;color:var(--text-muted);cursor:pointer}
+.pt-search button:hover{background:var(--surface-soft)}
+.pt-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin:0 0 30px;padding:0;list-style:none;font-size:12.5px;color:var(--text-secondary)}
+.pt-legend li{display:inline-flex;align-items:center;gap:7px}
+.pt-legend-gap{margin-left:10px;padding-left:16px;border-left:1px solid var(--line)}
+.pt-dot{flex:none;display:inline-block;width:9px;height:9px;border-radius:50%}
+.pt-dot.is-access{background:#3f8f5a}.pt-dot.is-core{background:#3d72b0}.pt-dot.is-ops{background:#c08a1c}.pt-dot.is-control{background:#7c5aa6}
+.pt-page mark{background:#fbe3a0;color:inherit;border-radius:2px;padding:0 1px}
+
+/* Tier 0 → 1: WeRide root, a bus across the actor row, a stub into each actor. These relations are exact, so they stay drawn. */
+.pt-stage{position:relative;display:flex;flex-direction:column;align-items:center}
+.pt-root{position:relative;display:inline-flex;align-items:center;gap:9px;padding:9px 16px 9px 12px;margin-bottom:22px;border-radius:10px;background:#1f3a2e;color:#f1f7f0;box-shadow:0 8px 20px -12px #1f3a2e}
+.pt-root span{font-size:12.5px;color:#b9cdbf;font-variant-numeric:tabular-nums}
+.pt-root::after{content:'';position:absolute;left:50%;top:100%;height:22px;border-left:1px solid var(--pt-line)}
+.pt-actors{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;width:100%;margin:0;padding:22px 0 0;list-style:none}
+.pt-actors::before{content:'';position:absolute;top:0;left:calc((100% - 60px) / 12);right:calc((100% - 60px) / 12);border-top:1px solid var(--pt-line)}
+.pt-actors>li{position:relative;display:flex}
+.pt-actors>li::before{content:'';position:absolute;bottom:100%;left:50%;height:22px;border-left:1px solid var(--pt-line)}
+
+/* Shared node language for actors and modules. */
+.pt-actor,.pt-mod{width:100%;border:1px solid var(--line);background:var(--surface);color:var(--text-primary);text-align:left;cursor:pointer;transition:opacity .18s var(--pt-ease),border-color .18s var(--pt-ease),background-color .18s var(--pt-ease),box-shadow .18s var(--pt-ease)}
+.pt-actor:hover,.pt-mod:hover{border-color:#8fa897}
+.pt-actor.is-lit,.pt-mod.is-lit{border-color:var(--pt-lit);background:var(--pt-tint);box-shadow:0 6px 18px -12px #1f3a2e}
+.pt-actor.is-dim,.pt-mod.is-dim{opacity:var(--pt-dim)}
+.pt-actor[aria-pressed=true],.pt-mod[aria-pressed=true]{box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--pt-lit)}
+
+.pt-actor{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:1fr auto;align-items:start;gap:8px 10px;padding:11px 12px;border-radius:12px}
+.pt-avatar{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:#e5efe7;color:var(--action);transition:background-color .18s var(--pt-ease),color .18s var(--pt-ease)}
+.pt-actor.is-lit .pt-avatar{background:var(--pt-lit);color:#fff}
+.pt-actor-text{display:flex;flex-direction:column;min-width:0;line-height:1.3}
+.pt-actor-text strong{font-size:14.5px;font-weight:650}
+.pt-actor-text small{font-size:12px;color:var(--text-muted)}
+.pt-actor-count{grid-column:1/-1;font-size:12px;color:var(--text-secondary);font-variant-numeric:tabular-nums}
+
+/* Tier 2: fourteen modules, each drawn once, in four group columns. Live edges land on a group's dot; its spine carries the light down to the lit modules. */
+.pt-edges{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:1}
+.pt-edges path{fill:none;stroke:var(--pt-lit);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0;animation:pt-draw .26s var(--pt-ease)}
+.pt-edges path.is-dashed{stroke:var(--pt-unsure);stroke-dasharray:5 4;animation:pt-fade .26s var(--pt-ease)}
+@keyframes pt-draw{from{stroke-dashoffset:1}}
+@keyframes pt-fade{from{opacity:0}}
+.pt-columns{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;width:100%;margin-top:64px;align-items:start}
+.pt-col{min-width:0}
+.pt-col-head{position:relative;display:flex;align-items:center;gap:8px;margin:0;padding-bottom:10px;font-size:13px;font-weight:650;line-height:20px;color:var(--text-secondary);transition:color .18s var(--pt-ease)}
+.pt-col-head span{margin-left:auto;font-size:12px;font-weight:600;color:var(--text-muted);font-variant-numeric:tabular-nums}
+.pt-col-head::after{content:'';position:absolute;left:4px;top:15px;bottom:0;border-left:1px solid var(--pt-line)}
+.pt-col.is-lit .pt-col-head{color:var(--text-primary)}
+.pt-col.is-lit .pt-col-head::after{border-color:var(--pt-lit)}
+.pt-col.is-lit .pt-col-head .pt-dot{outline:1px solid var(--pt-lit);outline-offset:2px}
+.pt-mods{margin:0;padding:0;list-style:none}
+.pt-mods>li{position:relative;padding:0 0 8px 22px}
+.pt-mods>li::before{content:'';position:absolute;left:4px;top:0;width:14px;height:21px;border:solid var(--pt-line);border-width:0 0 1px 1px;border-bottom-left-radius:7px}
+.pt-mods>li:not(:last-child)::after{content:'';position:absolute;left:4px;top:0;bottom:0;border-left:1px solid var(--pt-line)}
+.pt-mods>li.is-lit::before,.pt-mods>li.on-path::after{border-color:var(--pt-lit)}
+.pt-mods>li.is-lit.is-indirect::before{border-style:dashed;border-color:var(--pt-unsure)}
+.pt-mod{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;padding:9px 11px 10px;border-radius:10px}
+.pt-mod.is-shown:not(.is-lit){background:var(--surface-soft)}
+.pt-mod-name{font-size:13.5px;font-weight:600;line-height:20px}
+.pt-mod-count{font-size:12px;line-height:20px;color:var(--text-muted);font-variant-numeric:tabular-nums}
+.pt-pips{grid-column:1/-1;display:flex;gap:3px}
+.pt-pip{display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid transparent;border-radius:50%;color:#b9c6bd}
+.pt-pip.is-on{background:#e1ede4;color:var(--action)}
+.pt-pip.is-indirect{border-style:dashed;border-color:var(--pt-unsure);color:#8a6416}
+.pt-nomatch{width:100%;margin:18px 0 0;padding:14px 16px;border:1px dashed var(--line);border-radius:10px;color:var(--text-muted);font-size:14px}
+
+/* Tier 3: the submodules of the module in hand. */
+.pt-band{margin-top:34px;padding:18px 20px 20px;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:0 10px 28px -22px #1f3a2e;scroll-margin:16px}
+.pt-band.is-empty{border-style:dashed;background:transparent;box-shadow:none}
+.pt-band-empty{display:flex;align-items:center;justify-content:center;gap:10px;margin:0;padding:12px;color:var(--text-muted);font-size:14px;text-align:center}
+.pt-band-empty svg{flex:none;color:var(--action)}
+.pt-band-head{display:flex;flex-wrap:wrap;align-items:flex-start;gap:10px 16px;margin-bottom:16px}
+.pt-band-head>.icon-button{margin:-4px -6px 0 0}
+.pt-band-title{flex:1 1 320px;min-width:0}
+.pt-band-title>span{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--text-secondary)}
+.pt-band-title h2{margin:2px 0 0;font-size:20px;line-height:1.3}
+.pt-band-users{order:3;flex-basis:100%;display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px}
+.pt-band-users strong{margin-right:4px;font-weight:600;color:var(--text-secondary)}
+.pt-band-users span{display:inline-flex;align-items:center;gap:5px;padding:3px 10px 3px 8px;border:1px solid var(--line);border-radius:999px;background:var(--surface-soft)}
+.pt-band-users span svg{color:var(--action)}
+.pt-band-users span.is-indirect{border-style:dashed;border-color:var(--pt-unsure);background:#fffaf0}
+.pt-band-users em{font-style:normal;font-size:11.5px;color:#7a5a12}
+.pt-band-users em::before{content:'· '}
+.pt-subs{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;margin:0;padding:0;list-style:none}
+.pt-subs li{display:flex;flex-direction:column;gap:2px;padding:9px 12px;border-radius:9px;background:var(--surface-soft);font-size:13.5px;line-height:1.4;animation:pt-rise .24s var(--pt-ease) backwards}
+.pt-subs li:nth-child(n+2){animation-delay:.02s}.pt-subs li:nth-child(n+4){animation-delay:.04s}.pt-subs li:nth-child(n+7){animation-delay:.06s}
+.pt-subs li.is-shared{cursor:default;box-shadow:inset 0 0 0 1px #cfdcd3}
+.pt-subs li.is-shared:hover,.pt-subs li.is-shared:focus-visible{box-shadow:inset 0 0 0 1px var(--pt-lit);background:var(--pt-tint)}
+.pt-subs li small{font-size:12px;color:var(--text-muted)}
+.pt-subs li.is-match{background:#fff6dc}
+@keyframes pt-rise{from{opacity:0;transform:translateY(4px)}}
+
+@media (max-width:1100px){
+  .pt-root,.pt-edges{display:none}
+  .pt-actors{grid-template-columns:repeat(3,minmax(0,1fr));padding-top:0}.pt-actors::before,.pt-actors>li::before{display:none}
+  .pt-columns{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:30px;row-gap:24px}
+}
+@media (max-width:640px){
+  .pt-actors{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .pt-actor{grid-template-columns:minmax(0,1fr);padding:10px}.pt-avatar{width:30px;height:30px}
+  .pt-columns{grid-template-columns:minmax(0,1fr)}
+  .pt-legend-gap{margin-left:0;padding-left:0;border-left:0}
+  .pt-band{padding:16px}.pt-subs{grid-template-columns:minmax(0,1fr)}
+  .pt-search{width:100%}
+}
+@media (prefers-reduced-motion:reduce){.pt-actor,.pt-mod,.pt-avatar,.pt-col-head{transition:none}.pt-edges path,.pt-subs li{animation:none}}
